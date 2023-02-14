@@ -34,16 +34,16 @@ architecture ColorConverter_TB_ARCH of ColorConverter_TB is
     end component;
     
     --uut-signals-------------------------------------------SIGNALS
-    signal charPressed:    std_logic_vector(7 downto 0);
-    signal color:          std_logic_vector(23 downto 0);
-    signal sevenSegs:      std_logic_vector(6 downto 0);
+    signal charPressed:  std_logic_vector(7 downto 0);
+    signal color:        std_logic_vector(23 downto 0);
+    signal sevenSegs:    std_logic_vector(6 downto 0);
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
     UUT: ColorConverter port map(
         charPressed => charPressed,
-        color => color,
-        sevenSegs => sevenSegs
+        color       => color,
+        sevenSegs   => sevenSegs
     );
     
     --Switch and Button Driver----------------------------------------PROCESS
@@ -52,9 +52,16 @@ begin
         -- Possible charCount combinations go from 0 to 255 decimal. 
         -- to_unsigned keyword converts the "i" which is an int into the
         -- 8 bit binary representation which is charPressed's data type.
+--        for i in 0 to 255 loop
+--            charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
+--            wait for 10 ps;
+--        end loop;
+--        wait;
+        
         for i in 0 to 255 loop
-            charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
-            wait for 10 ns;
+            wait for 10 ps;
+            -- increment charPressed
+            charPressed <= std_logic_vector( signed(charPressed) + 1);
         end loop;
         wait;
     end process;

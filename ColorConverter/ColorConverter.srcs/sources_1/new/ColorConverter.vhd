@@ -27,7 +27,6 @@ entity ColorConverter is
 end ColorConverter;
 
 architecture ColorConverter_ARCH of ColorConverter is
-    -- signal ledCountLeft:  std_logic_vector(3 downto 0);
     
     -- Creating constants for ASCII char values
     constant r:    std_logic_vector(7 downto 0) := "01110010";
