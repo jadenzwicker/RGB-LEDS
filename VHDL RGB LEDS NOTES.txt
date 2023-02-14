@@ -51,4 +51,5 @@ No arrow keys using WASD instead
 Use conditional signal assignemtn statements casue they have more capability
 	downside is priority which is not needed but it doesnt matter since we cant 	illumnate two colors on same led
 
-	
+Terminal Help
+https://www.hackster.io/alexey-sudbin/uart-interface-in-vhdl-for-basys3-board-eef170https://www.instructables.com/UART-Communication-on-Basys-3-FPGA-Dev-Board-Power/	
