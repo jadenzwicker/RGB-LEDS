@@ -52,16 +52,10 @@ begin
         -- Possible charCount combinations go from 0 to 255 decimal. 
         -- to_unsigned keyword converts the "i" which is an int into the
         -- 8 bit binary representation which is charPressed's data type.
---        for i in 0 to 255 loop
---            charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
---            wait for 10 ps;
---        end loop;
---        wait;
-        
-        for i in 0 to 255 loop
-            wait for 10 ps;
+        for i in 0 to (2 ** charPressed'length - 1) loop
             -- increment charPressed
-            charPressed <= std_logic_vector( signed(charPressed) + 1);
+            charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
+            wait for 10 ps;
         end loop;
         wait;
     end process;
