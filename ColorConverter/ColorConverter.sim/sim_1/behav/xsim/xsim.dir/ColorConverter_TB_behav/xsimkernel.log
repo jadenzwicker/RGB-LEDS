@@ -2,3 +2,6 @@ Running: xsim.dir/ColorConverter_TB_behav/xsimk.exe -simmode gui -wdb ColorConve
 Design successfully loaded
 Design Loading Memory Usage: 6752 KB (Peak: 6752 KB)
 Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 7320 KB (Peak: 7320 KB)
+Simulation CPU Usage: 15 ms
