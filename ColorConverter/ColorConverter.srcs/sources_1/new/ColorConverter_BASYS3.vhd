@@ -1,47 +1,49 @@
-------------------------------------------------------------------------------------
----- Company: Kennesaw State University
----- Engineer: Jaden Zwicker
----- 
----- Module Name: ColorConverter_BASYS3 - ColorConverter_BASYS3_ARCH
----- 
----- Course Name: CPE 3020/01
----- Lab 3
----- 
-----      Wrapper file for ColorConverter component using the basys3 board.
-----
-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Company: Kennesaw State University
+-- Engineer: Jaden Zwicker
+-- 
+-- Module Name: ColorConverter_BASYS3 - ColorConverter_BASYS3_ARCH
+-- 
+-- Course Name: CPE 3020/01
+-- Lab 3
+-- 
+--      Wrapper file for ColorConverter component using the basys3 board.
+--
+----------------------------------------------------------------------------------
 
 
---library IEEE;
---use IEEE.STD_LOGIC_1164.ALL;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
---entity ColorConverter_BASYS3 is
---    -- Here we define the ports from the default basys3 config file.
---    -- Names must match config file names since we are porting from there.
---    port (  
---           sw :    in  std_logic_vector (2 downto 0);
---           btnL :  in  std_logic;
---           btnR :  in  std_logic;
---           led :   out std_logic_vector (15 downto 0)
---    );
---end ColorConverter_BASYS3;
+entity ColorConverter_BASYS3 is
+    -- Here we define the ports from the default basys3 config file.
+    -- Names must match config file names since we are porting from there.
+    port (  
+           sw :    in  std_logic_vector (7 downto 0);
+           seg :   out std_logic_vector (6 downto 0)
+    );
+end ColorConverter_BASYS3;
 
---architecture ColorConverter_BASYS3_ARCH of ColorConverter_BASYS3 is
---    -- This component is used to pull in the ports from the ColorConverter design.
---    component ColorConverter
---        port (
---                ledCount:     in  std_logic_vector(2 downto 0);  --switch inputs (active high)
---                leftButton:   in  std_logic;
---                rightButton:  in  std_logic;
---                leds:         out std_logic_vector(15 downto 0)  --led outputs (active low)
---        );
---    end component;
---begin
---    -- Mapping the config file pins to the ports in ColorConverter design.
---    MY_DESIGN: ColorConverter port map (
---        ledCount => sw,
---        leftButton => btnL,
---        rightButton => btnR,
---        leds => led
---    );
---end ColorConverter_BASYS3_ARCH;
+architecture ColorConverter_BASYS3_ARCH of ColorConverter_BASYS3 is
+    -- This component is used to pull in the ports from the ColorConverter design.
+    component ColorConverter
+        port (
+             charPressed:  in   std_logic_vector(7 downto 0);
+             color:        out  std_logic_vector(23 downto 0);
+             sevenSegs:    out  std_logic_vector(6 downto 0)  
+        );
+    end component;
+begin
+    -- Mapping the config file pins to the ports in ColorConverter design.
+    MY_DESIGN: ColorConverter port map (
+        charPressed => sw,
+        -- Bits need to be reversed to work with boards 7segment
+        sevenSegs(6) => seg(0),
+        sevenSegs(5) => seg(1),
+        sevenSegs(4) => seg(2),
+        sevenSegs(3) => seg(3),
+        sevenSegs(2) => seg(4),
+        sevenSegs(1) => seg(5),
+        sevenSegs(0) => seg(6)
+    );
+end ColorConverter_BASYS3_ARCH;
