@@ -2,7 +2,6 @@
 -- Company: Kennesaw State University
 -- Engineer: Jaden Zwicker
 -- 
--- Create Date: 01/31/2023 10:35:19 AM
 -- Module Name: ColorConverter - ColorConverter_ARCH
 -- 
 -- Course Name: CPE 3020/01

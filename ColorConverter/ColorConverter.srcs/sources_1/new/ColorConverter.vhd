@@ -29,15 +29,15 @@ end ColorConverter;
 architecture ColorConverter_ARCH of ColorConverter is
     
     -- Creating constants for ASCII char values
-    constant ASCII_R:    std_logic_vector(7 downto 0) := "01110010";
-    constant ASCII_o:    std_logic_vector(7 downto 0) := "01101111";
-    constant ASCII_y:    std_logic_vector(7 downto 0) := "01111001";
-    constant ASCII_g:    std_logic_vector(7 downto 0) := "01100101";
-    constant ASCII_b:    std_logic_vector(7 downto 0) := "01100010";
-    constant ASCII_i:    std_logic_vector(7 downto 0) := "01101001";
-    constant ASCII_v:    std_logic_vector(7 downto 0) := "01110100";
-    constant ASCII_h:    std_logic_vector(7 downto 0) := "01100111";
-    constant ASCII_k:    std_logic_vector(7 downto 0) := "01101011";
+    constant R:    std_logic_vector(7 downto 0) := "01110010";
+    constant O:    std_logic_vector(7 downto 0) := "01101111";
+    constant Y:    std_logic_vector(7 downto 0) := "01111001";
+    constant G:    std_logic_vector(7 downto 0) := "01100101";
+    constant B:    std_logic_vector(7 downto 0) := "01100010";
+    constant I:    std_logic_vector(7 downto 0) := "01101001";
+    constant V:    std_logic_vector(7 downto 0) := "01110100";
+    constant H:    std_logic_vector(7 downto 0) := "01100111";
+    constant K:    std_logic_vector(7 downto 0) := "01101011";
         
     -- Creating Constants for 24 Bit color code (hex color code in binary)
     constant RED:     std_logic_vector(23 downto 0) := "111111110000000000000000";
@@ -67,27 +67,27 @@ architecture ColorConverter_ARCH of ColorConverter is
 begin
 
     ASCII_TO_24BIT: with charPressed select
-        color <= RED     when ASCII_R,         
-                 ORANGE  when ASCII_O,
-                 YELLOW  when ASCII_Y,
-                 GREEN   when ASCII_G,
-                 BLUE    when ASCII_B,
-                 INDIGO  when ASCII_I,
-                 VIOLET  when ASCII_V,
-                 WHITE   when ASCII_H,
-                 BLACK   when ASCII_K,        -- not needed but added for readability
+        color <= RED     when R,         
+                 ORANGE  when O,
+                 YELLOW  when Y,
+                 GREEN   when G,
+                 BLUE    when B,
+                 INDIGO  when I,
+                 VIOLET  when V,
+                 WHITE   when H,
+                 BLACK   when K,        -- not needed but added for readability
                  BLACK   when others;                           -- default case
                  
     ASCII_TO_7SEG: with charPressed select
-        sevenSegs <= RED_7SEG      when ASCII_R,
-                     ORANGE_7SEG   when ASCII_O,
-                     YELLOW_7SEG   when ASCII_Y,
-                     GREEN_7SEG    when ASCII_G,
-                     BLUE_7SEG     when ASCII_B,
-                     INDIGO_7SEG   when ASCII_I,
-                     VIOLET_7SEG   when ASCII_V,
-                     WHITE_7SEG    when ASCII_H,
-                     BLACK_7SEG    when ASCII_K,
+        sevenSegs <= RED_7SEG      when R,
+                     ORANGE_7SEG   when O,
+                     YELLOW_7SEG   when Y,
+                     GREEN_7SEG    when G,
+                     BLUE_7SEG     when B,
+                     INDIGO_7SEG   when I,
+                     VIOLET_7SEG   when V,
+                     WHITE_7SEG    when H,
+                     BLACK_7SEG    when K,
                      BLANK_7SEG    when others;  -- 7seg will not show anything
                                                            -- for unknown input
 end ColorConverter_ARCH;
