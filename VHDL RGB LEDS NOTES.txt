@@ -1,0 +1,55 @@
+have different pattern modes
+	color all same
+	doheart
+	allow individual selection
+
+color options will be decided from a single character on keyboard that is set to a color
+	ie. 'R' results in red color 
+	Use ROYGBIV ?         could add T for teal etc...
+
+Show led(s) selected by making it flash
+
+When doing single selection deilluminate other leds unless they were previously set that programming round. AT start deilluminate all 
+
+
+Use up and down arrors to scroll through hex color code number. +10 in the color code for up arrow
+
+Color commands
+	'r'
+	'o'
+	'y'
+	'g
+	'b
+	'i
+	'v
+//	't'   teal
+//	'p'   purple
+	'k'   black? / turn off 
+	'h    white / FFFFFF
+	
+
+COmmands
+	'e     	    edit,   I want to make the key only do edits and have different key for other mode selections 
+	'WASD 	    for selections
+	'd'    move forward in led selection
+	'a'     move back in led selection 
+	'w'       brighten intensity?
+	's'     lower intensity?
+	'q'             quit, ends edit mode so it stays constant. 
+	'm' 		can select defualt modes. edit edits and quit only ends edit and m for mode, since in mode selection you canstill chaneg the colors of all leds in that mode. ie. red heart and blue heart options 
+	
+	In case of undefined key then jsut drop it on the floor and dont send anything, dont end selections tho just drop the input as if it was not clicked at all. 
+	
+	'c'       to clear all leds to "black"
+
+Use txt file to preprogram modes.?
+
+After a color selction click he wants to display the color choise on 7seg?
+
+No arrow keys using WASD instead
+
+Use conditional signal assignemtn statements casue they have more capability
+	downside is priority which is not needed but it doesnt matter since we cant 	illumnate two colors on same led
+
+Terminal Help
+https://www.hackster.io/alexey-sudbin/uart-interface-in-vhdl-for-basys3-board-eef170https://www.instructables.com/UART-Communication-on-Basys-3-FPGA-Dev-Board-Power/	
