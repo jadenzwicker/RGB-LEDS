@@ -9,7 +9,7 @@
 --
 -- Description:
 -- Creating a component to convert ASCII char code into a defined 24 bit color.
--- Upon color choice 7 segment dispaly with show the char input.
+-- Upon color choice 7 segment display will show the char input.
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -66,6 +66,7 @@ architecture ColorConverter_ARCH of ColorConverter is
         
 begin
 
+    -- Assigns color to the 24 bit binary code depending on ASCII code input
     ASCII_TO_24BIT: with charPressed select
         color <= RED     when R,         
                  ORANGE  when O,
@@ -78,6 +79,7 @@ begin
                  BLACK   when K,        -- not needed but added for readability
                  BLACK   when others;                           -- default case
                  
+    -- Assigns sevenSegs to the needed value to display the char input 
     ASCII_TO_7SEG: with charPressed select
         sevenSegs <= RED_7SEG      when R,
                      ORANGE_7SEG   when O,
