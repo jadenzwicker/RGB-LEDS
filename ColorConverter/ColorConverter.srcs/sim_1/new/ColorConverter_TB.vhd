@@ -11,8 +11,8 @@
 -- This test bench is to fully explore all possible input combinations of 
 -- ColorConverter.vhd. 
 --
--- Detailed variable naming explanations and overall function is explanation
--- is in ColorConverter.vhd file.
+-- Detailed variable naming explanations and overall function is explained
+-- in ColorConverter.vhd file.
 ----------------------------------------------------------------------------------
 
 library IEEE;
