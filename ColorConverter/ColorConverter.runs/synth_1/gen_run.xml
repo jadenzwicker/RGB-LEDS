@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1676463880">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1676904249">
   <File Type="PA-TCL" Name="ColorConverter_BASYS3.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="ColorConverter_BASYS3_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ColorConverter_BASYS3_reports.tcl"/>

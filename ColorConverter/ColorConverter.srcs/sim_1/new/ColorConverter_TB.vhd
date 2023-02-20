@@ -54,8 +54,9 @@ begin
         for i in 0 to (2 ** charPressed'length - 1) loop
             -- increment charPressed
             charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
-            wait for 10 ps;
+            wait for 1 ps;
         end loop;
-        wait;
+        -- Ends Simulation
+        report "simulation finished successfully" severity FAILURE;
     end process;
 end ColorConverter_TB_ARCH;

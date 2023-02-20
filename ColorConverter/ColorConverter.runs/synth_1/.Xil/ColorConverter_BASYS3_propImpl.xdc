@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:{D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc} rfile:../../../ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc} rfile:../../../ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:12 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports {sw[0]}]
 set_property src_info {type:XDC file:1 line:13 export:INPUT save:INPUT read:READ} [current_design]

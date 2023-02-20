@@ -1,2 +1,5 @@
 Vivado Simulator 2020.2
 Time resolution is 1 ps
+Failure: simulation finished successfully
+Time: 256 ps  Iteration: 0  Process: /ColorConverter_TB/CHAR_PRESSED_DRIVER  File: C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sim_1/new/ColorConverter_TB.vhd
+$finish called at time : 256 ps : File "C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sim_1/new/ColorConverter_TB.vhd" Line 59

@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.runs/synth_1/ColorConverter_BASYS3.tcl"
+  variable script "C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.runs/synth_1/ColorConverter_BASYS3.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,25 +70,23 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 3
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir {D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.cache/wt} [current_project]
-set_property parent.project_path {D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.xpr} [current_project]
+set_property webtalk.parent_dir {C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.cache/wt} [current_project]
+set_property parent.project_path {C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.xpr} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-set_property ip_output_repo {d:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.cache/ip} [current_project]
+set_property ip_output_repo {c:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.cache/ip} [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  {D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sources_1/new/ColorConverter.vhd}
-  {D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sources_1/new/ColorConverter_BASYS3.vhd}
+  {C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sources_1/new/ColorConverter.vhd}
+  {C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/sources_1/new/ColorConverter_BASYS3.vhd}
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -99,8 +97,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc}}
-set_property used_in_implementation false [get_files {{D:/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc}}]
+read_xdc {{C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.srcs/constrs_1/imports/Downloads/Basys3ConfigFile.xdc}}]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
