@@ -54,7 +54,7 @@ begin
         for i in 0 to (2 ** charPressed'length - 1) loop
             -- increment charPressed
             charPressed <= std_logic_vector(to_unsigned(i, charPressed'length));
-            wait for 1 ps;
+            wait for 1 ns;
         end loop;
         -- Ends Simulation
         report "simulation finished successfully" severity FAILURE;

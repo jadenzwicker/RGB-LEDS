@@ -124,6 +124,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 2
+  set_param xicom.use_bs_reader 1
   open_checkpoint ColorConverter_BASYS3_routed.dcp
   set_property webtalk.parent_dir {C:/Users/jaden/OneDrive/Desktop/RGB LEDS REPO/RGB-LEDS/ColorConverter/ColorConverter.cache/wt} [current_project]
 set_property TOP ColorConverter_BASYS3 [current_fileset]

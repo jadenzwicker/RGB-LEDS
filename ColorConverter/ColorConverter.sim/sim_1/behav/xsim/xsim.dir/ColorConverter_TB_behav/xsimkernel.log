@@ -1,7 +1,7 @@
-Running: xsim.dir/ColorConverter_TB_behav/xsimk.exe -simmode gui -wdb ColorConverter_TB_behav.wdb -simrunnum 0 -socket 49695
+Running: xsim.dir/ColorConverter_TB_behav/xsimk.exe -simmode gui -wdb ColorConverter_TB_behav.wdb -simrunnum 0 -socket 53757
 Design successfully loaded
-Design Loading Memory Usage: 6780 KB (Peak: 6780 KB)
-Design Loading CPU Usage: 30 ms
+Design Loading Memory Usage: 6796 KB (Peak: 6796 KB)
+Design Loading CPU Usage: 15 ms
 Simulation completed
-Simulation Memory Usage: 7404 KB (Peak: 7404 KB)
-Simulation CPU Usage: 30 ms
+Simulation Memory Usage: 7420 KB (Peak: 7420 KB)
+Simulation CPU Usage: 15 ms
