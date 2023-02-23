@@ -51,5 +51,10 @@ No arrow keys using WASD instead
 Use conditional signal assignemtn statements casue they have more capability
 	downside is priority which is not needed but it doesnt matter since we cant 	illumnate two colors on same led
 
+
+Have led selection rotate. ie. when max led position is selected and you pressed increment you go back to led 1
+
+if increment and decrement are both pressed dont go either direction.
+
 Terminal Help
 https://www.hackster.io/alexey-sudbin/uart-interface-in-vhdl-for-basys3-board-eef170https://www.instructables.com/UART-Communication-on-Basys-3-FPGA-Dev-Board-Power/	
