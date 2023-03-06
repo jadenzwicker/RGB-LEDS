@@ -1,13 +1,13 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity LedPosition_TB is
 end LedPosition_TB;
 
 architecture LedPosition_TB_ARCH of LedPosition_TB is
     
-    -- Creating Constant for the NUM_OF_LEDS being tested up to, used in signal 
+    -- Creating Constant for the NUM_OF_LEDS being tested up to, used in signal
     -- definition and generic map definition.
     constant NUM_OF_LEDS: positive := 14;
     constant ACTIVE: std_logic := '1';
@@ -35,7 +35,7 @@ architecture LedPosition_TB_ARCH of LedPosition_TB is
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
-    UUT: LedPosition 
+    UUT: LedPosition
     generic map (NUM_OF_LEDS)
     port map(
         reset                             => reset,
@@ -98,7 +98,7 @@ begin
         decrementCurrentLedPositionEnable <= '0';
         wait for 10 ns;
         
-    -- Testing Without Reset    
+    -- Testing Without Reset
         editMode <= '0';
         wait for 25 ns;
         

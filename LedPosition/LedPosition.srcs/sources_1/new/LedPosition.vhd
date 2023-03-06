@@ -1,27 +1,27 @@
 --==================================================================================
--- 
+--
 -- Name: LedPosition
 -- University: Kennesaw State University
--- Designer: Jaden Zwicker 
--- 
---     This component seeks to manage the current position of a led being modified. 
---     Upon the editMode port being assigned an ACTIVE signal the current led's 
---     position will be modifiable and output as currentLedPosition. The two 
---     controls to modify the currentLedPosition are 
+-- Designer: Jaden Zwicker
+--
+--     This component seeks to manage the current position of a led being modified.
+--     Upon the editMode port being assigned an ACTIVE signal the current led's
+--     position will be modifiable and output as currentLedPosition. The two
+--     controls to modify the currentLedPosition are
 --     incrementCurrentLedPositionEnable and decrementCurrentLedPositionEnable and
---     they perform the operation in their names accordingly. 
+--     they perform the operation in their names accordingly.
 --
 --     In the situation of both enable signals being ACTIVE the component will hold
 --     the currentLedPosition.
 --
---     Upon initialization of this generic component the NUM_OF_LEDS must be 
---     assigned the number of leds to be controlled. 
+--     Upon initialization of this generic component the NUM_OF_LEDS must be
+--     assigned the number of leds to be controlled.
 --
---     This component loops the currentLedPostion. 
+--     This component loops the currentLedPostion.
 --     ie. When the last possible led is selected and a user enables the increment
 --     signal the position will go back to the beginning led rather than counting to
---     a non-existent led position.        
---     
+--     a non-existent led position.
+--
 --==================================================================================
 
 library ieee;
@@ -60,7 +60,7 @@ begin
                 currentLedPosition_IS <= 0;
                 
             elsif (editMode = ACTIVE) then
-                if ((incrementCurrentLedPositionEnable and 
+                if ((incrementCurrentLedPositionEnable and
                      decrementCurrentLedPositionEnable) = ACTIVE) then
                     currentLedPosition_IS <= currentLedPosition_IS;
                     
@@ -84,8 +84,7 @@ begin
     
     -- Assigns the currentLedPosition_IS to the currentLedPosition port.
     -- Hence it is necessary to convert from int to std_logic_vector.
-    currentLedPosition <= 
+    currentLedPosition <=
     std_logic_vector(to_unsigned(currentLedPosition_IS, currentLedPosition'length));
     
 end LedPosition_ARCH;
-
