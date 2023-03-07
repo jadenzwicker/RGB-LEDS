@@ -1,3 +1,13 @@
+--==================================================================================
+--=
+--= Name: LedPosition_TB
+--= University: Kennesaw State University
+--= Designer: Jaden Zwicker
+--=
+--=     Test Bench for LedPosition component
+--=
+--==================================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

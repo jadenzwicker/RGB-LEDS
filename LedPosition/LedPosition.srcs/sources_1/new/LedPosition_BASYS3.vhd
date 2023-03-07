@@ -1,43 +1,264 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 03/06/2023 05:06:32 PM
--- Design Name: 
--- Module Name: LedPosition_BASYS3 - LedPosition_BASYS3_ARCH
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
+--==================================================================================
+--=
+--= Name: LedPosition_BASYS3
+--= University: Kennesaw State University
+--= Designer: Jaden Zwicker
+--=
+--=     Basys3 wrapper for LedPosition component. Utilizes other componets such as:
+--=         SynchronizerChain
+--=         Debouncer
+--=         SevenSegmentDriver
+--=
+--=     NUM_OF_OUTPUT_BITS must be defined as 8 or greater for this implementation.
+--=
+--==================================================================================
 
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity LedPosition_BASYS3 is
---  Port ( );
+	port(
+		clk:   in   std_logic;
+		btnC:  in   std_logic;
+		btnR:  in   std_logic;
+		btnL:  in   std_logic;
+		sw:    in   std_logic_vector(15 downto 0);
+		seg:   out  std_logic_vector(6 downto 0);
+		an:    out  std_logic_vector(3 downto 0)
+		);
 end LedPosition_BASYS3;
 
 architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
+	-- Active High constant implemented for readability.
+	constant ACTIVE: std_logic := '1';
+	-- The number of leds on board to be driven
+	constant NUM_OF_LEDS: positive := 16;
+	-- The number of bits needed to represent NUM_OF_LEDS in binary
+	constant NUM_OF_OUTPUT_BITS: positive := 8;
+
+	-- Internal Connection Signals
+	signal incrementCurrentLedPositionAsync: std_logic;
+	signal decrementCurrentLedPositionAsync: std_logic;
+    signal editModeAsync:                    std_logic;
+    
+    signal incrementCurrentLedPositionSync:  std_logic;
+    signal decrementCurrentLedPositionSync:  std_logic;
+    signal editModeSync:                     std_logic;
+    
+    signal incrementCurrentLedPositionEnable:  std_logic;
+    signal decrementCurrentLedPositionEnable:  std_logic;
+    signal editMode:                           std_logic;
+    
+    signal currentLedPosition: std_logic_vector(NUM_OF_LEDS - 1 downto 0);
+    
+    signal digit0: std_logic_vector(3 downto 0);
+    signal digit1: std_logic_vector(3 downto 0);
+    
+    signal sevenSegs: std_logic_vector(6 downto 0);
+    signal anodes:    std_logic_vector(3 downto 0);
+
+    --============================================================================
+    --  LedPosition                                                      COMPONENT
+    --============================================================================
+    component LedPosition
+		generic(NUM_OF_LEDS: positive := 16);
+        -- All ports are defined as std_logic variants for per standard.
+        port(
+            reset:                              in  std_logic;
+            clock:                              in  std_logic;
+            incrementCurrentLedPositionEnable:  in  std_logic;
+            decrementCurrentLedPositionEnable:  in  std_logic;
+            editMode:                           in  std_logic;
+            currentLedPosition:                 out std_logic_vector(NUM_OF_LEDS - 1 downto 0)
+        );
+	end component LedPosition;
+
+    --============================================================================
+    --  SynchronizerChain                                                COMPONENT
+    --============================================================================
+	component SynchronizerChain
+		generic (CHAIN_SIZE: positive);
+        port (
+            reset:    in  std_logic;
+            clock:    in  std_logic;
+            asyncIn:  in  std_logic;
+            syncOut:  out std_logic
+        );
+	end component SynchronizerChain;
+
+    --============================================================================
+    --  Debouncer                                                        COMPONENT
+    --============================================================================
+    component Debouncer
+		port (
+            reset:          in  std_logic;
+            clock:          in  std_logic;
+            input:          in  std_logic;
+            debouncedInput: out std_logic
+        );
+	end component Debouncer;
+	
+	--============================================================================
+    --  SevenSegmentDriver                                               COMPONENT
+    --============================================================================
+	component SevenSegmentDriver
+		port(
+            reset: in std_logic;
+            clock: in std_logic;
+    
+            digit3: in std_logic_vector(3 downto 0);    --leftmost digit
+            digit2: in std_logic_vector(3 downto 0);    --2nd from left digit
+            digit1: in std_logic_vector(3 downto 0);    --3rd from left digit
+            digit0: in std_logic_vector(3 downto 0);    --rightmost digit
+    
+            blank3: in std_logic;    --leftmost digit
+            blank2: in std_logic;    --2nd from left digit
+            blank1: in std_logic;    --3rd from left digit
+            blank0: in std_logic;    --rightmost digit
+    
+            sevenSegs: out std_logic_vector(6 downto 0);    --MSB=g, LSB=a
+            anodes:    out std_logic_vector(3 downto 0)    --MSB=leftmost digit
+        );
+	end component SevenSegmentDriver;
+
+    function to_bcd_8bit(inputValue: integer) return std_logic_vector is
+        variable tensValue: integer;
+        variable onesValue: integer;
+    begin
+        if (inputValue < 99) then
+            tensValue := inputValue / 10;
+            onesValue := inputValue mod 10;
+        else
+            tensValue := 9;
+            onesValue := 9;
+        end if;
+        return std_logic_vector(to_unsigned(tensValue, 4))
+               & std_logic_vector(to_unsigned(onesValue, 4));
+    end to_bcd_8bit;
+
 begin
 
+    -- Assigning ports to internal signals 
+    incrementCurrentLedPositionAsync <= btnR;
+    decrementCurrentLedPositionAsync <= btnL;
+    editModeAsync                    <= sw(0);
 
+	--============================================================================
+	--  SynchronizerChain component being initalized as SYNC_BTNR
+	--============================================================================
+	SYNC_BTNR: SynchronizerChain
+		generic map (1)
+		port map (
+			clock    => clk,
+			reset    => btnC,
+			asyncIn  => incrementCurrentLedPositionAsync,
+			syncOut  => incrementCurrentLedPositionSync
+			);
+
+    --============================================================================
+	--  SynchronizerChain component being initalized as SYNC_BTNL
+	--============================================================================
+	SYNC_BTNL: SynchronizerChain
+		generic map (1)
+		port map (
+			clock    => clk,
+			reset    => btnC,
+			asyncIn  => decrementCurrentLedPositionAsync,
+			syncOut  => decrementCurrentLedPositionSync
+			);
+			
+	--============================================================================
+	--  SynchronizerChain component being initalized as SYNC_SW0
+	--============================================================================
+	SYNC_SW0: SynchronizerChain
+		generic map (1)
+		port map (
+			clock    => clk,
+			reset    => btnC,
+			asyncIn  => editModeAsync,
+			syncOut  => editModeSync
+			);
+			
+	--============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_INC
+	--============================================================================
+	DEBOUNCE_INC: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => incrementCurrentLedPositionSync,
+			debouncedInput  => incrementCurrentLedPositionEnable
+			);		
+
+    --============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_DEC
+	--============================================================================
+	DEBOUNCE_DEC: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => decrementCurrentLedPositionSync,
+			debouncedInput  => decrementCurrentLedPositionEnable
+			);
+			
+	--============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_MODE
+	--============================================================================
+	DEBOUNCE_MODE: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => editModeSync,
+			debouncedInput  => editMode
+			);
+			
+	--============================================================================
+	--  LedPosition component being initalized as LED_POSITION_DRIVER
+	--============================================================================
+	LED_POSITION_DRIVER: LedPosition
+		generic map (
+		  NUM_OF_LEDS        => NUM_OF_LEDS,
+		  NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
+		  )
+		port map (
+			clock                             => clk,
+			reset                             => btnC,
+			incrementCurrentLedPositionEnable => incrementCurrentLedPositionEnable,
+			decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
+			editMode                          => editMode,
+			currentLedPosition                => currentLedPosition
+			);		
+			
+	--============================================================================
+	--  Implements to_bcd_8bit
+	--  currentLedPosition is converted to bcd values and each bcd digit is then
+	--  assigned accordingly. 
+	--============================================================================	
+	digit0 <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)))(7 downto 4);
+	digit1 <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)))(3 downto 0);
+	
+	--============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_MODE
+	--============================================================================
+	SEVEN_SEG_DRIVER: SevenSegmentDriver
+		port map (
+			clock     => clk,
+			reset     => btnC,
+			digit0    => digit0,
+			digit1    => digit1,
+			digit2    => (others=>'0'),
+			digit3    => (others=>'0'),
+			blank0    => not ACTIVE,
+			blank1    => not ACTIVE,
+			blank2    => ACTIVE,
+			blank3    => ACTIVE,
+			sevenSegs => sevenSegs,
+			anodes    => anodes
+			);
+			
+	seg <= sevenSegs;
+	an  <= anodes;		
+					
 end LedPosition_BASYS3_ARCH;
