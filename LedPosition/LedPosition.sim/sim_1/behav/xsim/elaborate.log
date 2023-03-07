@@ -1,6 +1,6 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 1131bcaaff014cf99f0d1a7c576a29ff --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot LedPosition_TB_behav xil_defaultlib.LedPosition_TB -log elaborate.log 
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 1131bcaaff014cf99f0d1a7c576a29ff --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot LedPosition_BASYS3_TB_behav xil_defaultlib.LedPosition_BASYS3_TB -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -11,6 +11,10 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
-Compiling architecture ledposition_arch of entity xil_defaultlib.LedPosition [\LedPosition(num_of_leds=14)\]
-Compiling architecture ledposition_tb_arch of entity xil_defaultlib.ledposition_tb
-Built simulation snapshot LedPosition_TB_behav
+Compiling architecture synchronizerchain_arch of entity xil_defaultlib.SynchronizerChain [\SynchronizerChain(chain_size=2)...]
+Compiling architecture synchronizerchain_arch of entity xil_defaultlib.SynchronizerChain [\SynchronizerChain(chain_size=1)...]
+Compiling architecture ledposition_arch of entity xil_defaultlib.LedPosition [ledposition_default]
+Compiling architecture sevensegmentdriver_arch of entity xil_defaultlib.SevenSegmentDriver [sevensegmentdriver_default]
+Compiling architecture ledposition_basys3_arch of entity xil_defaultlib.LedPosition_BASYS3 [ledposition_basys3_default]
+Compiling architecture ledposition_basys3_tb_arch of entity xil_defaultlib.ledposition_basys3_tb
+Built simulation snapshot LedPosition_BASYS3_TB_behav

@@ -19,19 +19,23 @@ architecture LedPosition_TB_ARCH of LedPosition_TB is
     
     -- Creating Constant for the NUM_OF_LEDS being tested up to, used in signal
     -- definition and generic map definition.
-    constant NUM_OF_LEDS: positive := 14;
+    constant NUM_OF_LEDS:        positive := 12;
+    constant NUM_OF_OUTPUT_BITS: positive := 8;
     constant ACTIVE: std_logic := '1';
     
     --unit-under-test-------------------------------------COMPONENT
     component LedPosition
-        generic(NUM_OF_LEDS: positive);
+        generic(
+        NUM_OF_LEDS:        positive := 16;
+        NUM_OF_OUTPUT_BITS: positive := 8
+        );
         port (
             reset:                              in  std_logic;
             clock:                              in  std_logic;
             incrementCurrentLedPositionEnable:  in  std_logic;
             decrementCurrentLedPositionEnable:  in  std_logic;
             editMode:                           in  std_logic;
-            currentLedPosition:                 out std_logic_vector(NUM_OF_LEDS - 1 downto 0)
+            currentLedPosition:                 out std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0)
         );
     end component;
     
@@ -41,12 +45,15 @@ architecture LedPosition_TB_ARCH of LedPosition_TB is
     signal incrementCurrentLedPositionEnable:   std_logic;
     signal decrementCurrentLedPositionEnable:   std_logic;
     signal editMode:                            std_logic;
-    signal currentLedPosition:                  std_logic_vector(NUM_OF_LEDS -1 downto 0);
+    signal currentLedPosition:                  std_logic_vector(NUM_OF_OUTPUT_BITS -1 downto 0);
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
     UUT: LedPosition
-    generic map (NUM_OF_LEDS)
+    generic map (
+    NUM_OF_LEDS        => NUM_OF_LEDS,
+    NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
+    )
     port map(
         reset                             => reset,
         clock                             => clock,

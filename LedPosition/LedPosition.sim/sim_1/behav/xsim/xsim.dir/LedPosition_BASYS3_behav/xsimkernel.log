@@ -1,0 +1,7 @@
+Running: xsim.dir/LedPosition_BASYS3_behav/xsimk.exe -simmode gui -wdb LedPosition_BASYS3_behav.wdb -simrunnum 0 -socket 62722
+Design successfully loaded
+Design Loading Memory Usage: 7328 KB (Peak: 7328 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 7700 KB (Peak: 7700 KB)
+Simulation CPU Usage: 46 ms

@@ -1,2 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_TB.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'LedPosition_TB'
+INFO: [VRFC 10-163] Analyzing VHDL file "D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'LedPosition_BASYS3'

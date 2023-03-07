@@ -2,5 +2,10 @@
 2020.2
 Nov 18 2020
 09:47:47
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_TB.vhd,1678139274,vhdl,,,,ledposition_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd,1678137137,vhdl,,,,ledposition,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_BASYS3_TB.vhd,1678153463,vhdl,,,,ledposition_basys3_tb,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_TB.vhd,1678151070,vhdl,,,,ledposition_tb,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd,1678142119,vhdl,,,,debouncer,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd,1678151072,vhdl,,,,ledposition,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd,1678155454,vhdl,,,,ledposition_basys3,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd,1678141429,vhdl,,,,sevensegmentdriver,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd,1678141372,vhdl,,,,synchronizerchain,,,,,,,,

@@ -25,7 +25,8 @@ entity LedPosition_BASYS3 is
 		btnL:  in   std_logic;
 		sw:    in   std_logic_vector(15 downto 0);
 		seg:   out  std_logic_vector(6 downto 0);
-		an:    out  std_logic_vector(3 downto 0)
+		an:    out  std_logic_vector(3 downto 0);
+		led:   out  std_logic_vector(15 downto 0)
 		);
 end LedPosition_BASYS3;
 
@@ -51,10 +52,11 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     signal decrementCurrentLedPositionEnable:  std_logic;
     signal editMode:                           std_logic;
     
-    signal currentLedPosition: std_logic_vector(NUM_OF_LEDS - 1 downto 0);
+    signal currentLedPosition: std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0);
     
-    signal digit0: std_logic_vector(3 downto 0);
-    signal digit1: std_logic_vector(3 downto 0);
+    signal digit0:     std_logic_vector(3 downto 0);
+    signal digit1:     std_logic_vector(3 downto 0);
+    signal tempDigits: std_logic_vector(7 downto 0);
     
     signal sevenSegs: std_logic_vector(6 downto 0);
     signal anodes:    std_logic_vector(3 downto 0);
@@ -63,7 +65,10 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     --  LedPosition                                                      COMPONENT
     --============================================================================
     component LedPosition
-		generic(NUM_OF_LEDS: positive := 16);
+		generic(
+            NUM_OF_LEDS:        positive := 16;
+            NUM_OF_OUTPUT_BITS: positive := 8
+        );
         -- All ports are defined as std_logic variants for per standard.
         port(
             reset:                              in  std_logic;
@@ -71,7 +76,7 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
             incrementCurrentLedPositionEnable:  in  std_logic;
             decrementCurrentLedPositionEnable:  in  std_logic;
             editMode:                           in  std_logic;
-            currentLedPosition:                 out std_logic_vector(NUM_OF_LEDS - 1 downto 0)
+            currentLedPosition:                 out std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0)
         );
 	end component LedPosition;
 
@@ -140,6 +145,10 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
 begin
 
+    led(0) <= incrementCurrentLedPositionSync;
+    led(1) <= decrementCurrentLedPositionSync;
+    led(3) <= editModeSync;
+
     -- Assigning ports to internal signals 
     incrementCurrentLedPositionAsync <= btnR;
     decrementCurrentLedPositionAsync <= btnL;
@@ -149,7 +158,7 @@ begin
 	--  SynchronizerChain component being initalized as SYNC_BTNR
 	--============================================================================
 	SYNC_BTNR: SynchronizerChain
-		generic map (1)
+		generic map (2)
 		port map (
 			clock    => clk,
 			reset    => btnC,
@@ -161,7 +170,7 @@ begin
 	--  SynchronizerChain component being initalized as SYNC_BTNL
 	--============================================================================
 	SYNC_BTNL: SynchronizerChain
-		generic map (1)
+		generic map (2)
 		port map (
 			clock    => clk,
 			reset    => btnC,
@@ -181,53 +190,53 @@ begin
 			syncOut  => editModeSync
 			);
 			
-	--============================================================================
-	--  Debouncer component being initalized as DEBOUNCER_INC
-	--============================================================================
-	DEBOUNCE_INC: Debouncer
-		port map (
-			clock           => clk,
-			reset           => btnC,
-			input           => incrementCurrentLedPositionSync,
-			debouncedInput  => incrementCurrentLedPositionEnable
-			);		
+--	--============================================================================
+--	--  Debouncer component being initalized as DEBOUNCER_INC
+--	--============================================================================
+--	DEBOUNCE_INC: Debouncer
+--		port map (
+--			clock           => clk,
+--			reset           => btnC,
+--			input           => incrementCurrentLedPositionSync,
+--			debouncedInput  => incrementCurrentLedPositionEnable
+--			);		
 
-    --============================================================================
-	--  Debouncer component being initalized as DEBOUNCER_DEC
-	--============================================================================
-	DEBOUNCE_DEC: Debouncer
-		port map (
-			clock           => clk,
-			reset           => btnC,
-			input           => decrementCurrentLedPositionSync,
-			debouncedInput  => decrementCurrentLedPositionEnable
-			);
+--    --============================================================================
+--	--  Debouncer component being initalized as DEBOUNCER_DEC
+--	--============================================================================
+--	DEBOUNCE_DEC: Debouncer
+--		port map (
+--			clock           => clk,
+--			reset           => btnC,
+--			input           => decrementCurrentLedPositionSync,
+--			debouncedInput  => decrementCurrentLedPositionEnable
+--			);
 			
-	--============================================================================
-	--  Debouncer component being initalized as DEBOUNCER_MODE
-	--============================================================================
-	DEBOUNCE_MODE: Debouncer
-		port map (
-			clock           => clk,
-			reset           => btnC,
-			input           => editModeSync,
-			debouncedInput  => editMode
-			);
+--	--============================================================================
+--	--  Debouncer component being initalized as DEBOUNCER_MODE
+--	--============================================================================
+--	DEBOUNCE_MODE: Debouncer
+--		port map (
+--			clock           => clk,
+--			reset           => btnC,
+--			input           => editModeSync,
+--			debouncedInput  => editMode
+--			);
 			
 	--============================================================================
 	--  LedPosition component being initalized as LED_POSITION_DRIVER
 	--============================================================================
 	LED_POSITION_DRIVER: LedPosition
 		generic map (
-		  NUM_OF_LEDS        => NUM_OF_LEDS,
-		  NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
-		  )
+		    NUM_OF_LEDS        => NUM_OF_LEDS,
+		    NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
+		    )
 		port map (
 			clock                             => clk,
 			reset                             => btnC,
-			incrementCurrentLedPositionEnable => incrementCurrentLedPositionEnable,
-			decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
-			editMode                          => editMode,
+			incrementCurrentLedPositionEnable => incrementCurrentLedPositionSync,
+			decrementCurrentLedPositionEnable => decrementCurrentLedPositionSync,
+			editMode                          => editModeSync,
 			currentLedPosition                => currentLedPosition
 			);		
 			
@@ -236,11 +245,12 @@ begin
 	--  currentLedPosition is converted to bcd values and each bcd digit is then
 	--  assigned accordingly. 
 	--============================================================================	
-	digit0 <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)))(7 downto 4);
-	digit1 <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)))(3 downto 0);
+	tempDigits <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)));
+	digit1 <= tempDigits(7 downto 4);    -- tens place
+	digit0 <= tempDigits(3 downto 0);    -- ones place
 	
 	--============================================================================
-	--  Debouncer component being initalized as DEBOUNCER_MODE
+	--  SevenSegmentDriver component being initalized as SEVEN_SEG_DRIVER
 	--============================================================================
 	SEVEN_SEG_DRIVER: SevenSegmentDriver
 		port map (
