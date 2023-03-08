@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Mon Mar  6 21:15:36 2023
+| Date             : Wed Mar  8 15:51:07 2023
 | Host             : 3304-PC running 64-bit major release  (build 9200)
 | Command          : report_power -file LedPosition_BASYS3_power_routed.rpt -pb LedPosition_BASYS3_power_summary_routed.pb -rpx LedPosition_BASYS3_power_routed.rpx
 | Design           : LedPosition_BASYS3
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.078        |
+| Total On-Chip Power (W)  | 0.089        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.007        |
+| Dynamic (W)              | 0.017        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |       78 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       34 |     20800 |            0.16 |
-|   Register     |    <0.001 |       30 |     41600 |            0.07 |
+| Slice Logic    |    <0.001 |       94 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       41 |     20800 |            0.20 |
+|   Register     |    <0.001 |       32 |     41600 |            0.08 |
 |   CARRY4       |    <0.001 |        4 |      8150 |            0.05 |
-|   Others       |     0.000 |        7 |       --- |             --- |
-| Signals        |    <0.001 |       67 |       --- |             --- |
-| I/O            |     0.006 |       32 |       106 |           30.19 |
+|   Others       |     0.000 |       10 |       --- |             --- |
+| Signals        |    <0.001 |       75 |       --- |             --- |
+| I/O            |     0.016 |       32 |       106 |           30.19 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.078 |          |           |                 |
+| Total          |     0.089 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,8 +72,8 @@ Table of Contents
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Vccint    |       1.000 |     0.011 |       0.001 |      0.010 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.013 |       0.001 |      0.013 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.006 |       0.005 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -140,7 +140,7 @@ Table of Contents
 +--------------------+-----------+
 | Name               | Power (W) |
 +--------------------+-----------+
-| LedPosition_BASYS3 |     0.007 |
+| LedPosition_BASYS3 |     0.017 |
 +--------------------+-----------+
 
 

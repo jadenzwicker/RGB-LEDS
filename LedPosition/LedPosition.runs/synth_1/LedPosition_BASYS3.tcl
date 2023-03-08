@@ -88,6 +88,7 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
+  D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd
   D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd
   D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd
   D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd

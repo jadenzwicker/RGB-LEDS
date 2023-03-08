@@ -25,8 +25,8 @@ entity LedPosition_BASYS3 is
 		btnL:  in   std_logic;
 		sw:    in   std_logic_vector(15 downto 0);
 		seg:   out  std_logic_vector(6 downto 0);
-		an:    out  std_logic_vector(3 downto 0);
-		led:   out  std_logic_vector(15 downto 0)
+		led:    out  std_logic_vector(15 downto 0);
+		an:    out  std_logic_vector(3 downto 0)
 		);
 end LedPosition_BASYS3;
 
@@ -97,7 +97,7 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     --  Debouncer                                                        COMPONENT
     --============================================================================
     component Debouncer
-		port (
+        port (
             reset:          in  std_logic;
             clock:          in  std_logic;
             input:          in  std_logic;
@@ -145,9 +145,15 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
 begin
 
-    led(0) <= incrementCurrentLedPositionSync;
-    led(1) <= decrementCurrentLedPositionSync;
-    led(3) <= editModeSync;
+    led(7 downto 0) <= currentLedPosition;
+
+    led(10) <= incrementCurrentLedPositionEnable;
+    led(11) <= decrementCurrentLedPositionEnable;
+    led(12) <= editMode;
+    
+    led(13) <= incrementCurrentLedPositionSync;
+    led(14) <= decrementCurrentLedPositionSync;
+    led(15) <= editModeSync;
 
     -- Assigning ports to internal signals 
     incrementCurrentLedPositionAsync <= btnR;
@@ -182,7 +188,7 @@ begin
 	--  SynchronizerChain component being initalized as SYNC_SW0
 	--============================================================================
 	SYNC_SW0: SynchronizerChain
-		generic map (1)
+		generic map (2)
 		port map (
 			clock    => clk,
 			reset    => btnC,
@@ -190,38 +196,38 @@ begin
 			syncOut  => editModeSync
 			);
 			
---	--============================================================================
---	--  Debouncer component being initalized as DEBOUNCER_INC
---	--============================================================================
---	DEBOUNCE_INC: Debouncer
---		port map (
---			clock           => clk,
---			reset           => btnC,
---			input           => incrementCurrentLedPositionSync,
---			debouncedInput  => incrementCurrentLedPositionEnable
---			);		
+	--============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_INC
+	--============================================================================
+	DEBOUNCE_INC: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => incrementCurrentLedPositionSync,
+			debouncedInput  => incrementCurrentLedPositionEnable
+			);		
 
---    --============================================================================
---	--  Debouncer component being initalized as DEBOUNCER_DEC
---	--============================================================================
---	DEBOUNCE_DEC: Debouncer
---		port map (
---			clock           => clk,
---			reset           => btnC,
---			input           => decrementCurrentLedPositionSync,
---			debouncedInput  => decrementCurrentLedPositionEnable
---			);
+    --============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_DEC
+	--============================================================================
+	DEBOUNCE_DEC: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => decrementCurrentLedPositionSync,
+			debouncedInput  => decrementCurrentLedPositionEnable
+			);
 			
---	--============================================================================
---	--  Debouncer component being initalized as DEBOUNCER_MODE
---	--============================================================================
---	DEBOUNCE_MODE: Debouncer
---		port map (
---			clock           => clk,
---			reset           => btnC,
---			input           => editModeSync,
---			debouncedInput  => editMode
---			);
+	--============================================================================
+	--  Debouncer component being initalized as DEBOUNCER_MODE
+	--============================================================================
+	DEBOUNCE_MODE: Debouncer
+		port map (
+			clock           => clk,
+			reset           => btnC,
+			input           => editModeSync,
+			debouncedInput  => editMode
+			);
 			
 	--============================================================================
 	--  LedPosition component being initalized as LED_POSITION_DRIVER
@@ -234,9 +240,9 @@ begin
 		port map (
 			clock                             => clk,
 			reset                             => btnC,
-			incrementCurrentLedPositionEnable => incrementCurrentLedPositionSync,
-			decrementCurrentLedPositionEnable => decrementCurrentLedPositionSync,
-			editMode                          => editModeSync,
+			incrementCurrentLedPositionEnable => incrementCurrentLedPositionEnable,
+			decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
+			editMode                          => editMode,
 			currentLedPosition                => currentLedPosition
 			);		
 			
