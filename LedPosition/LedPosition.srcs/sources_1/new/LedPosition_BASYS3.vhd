@@ -25,7 +25,7 @@ entity LedPosition_BASYS3 is
 		btnL:  in   std_logic;
 		sw:    in   std_logic_vector(15 downto 0);
 		seg:   out  std_logic_vector(6 downto 0);
-		led:    out  std_logic_vector(15 downto 0);
+		led:   out  std_logic_vector(15 downto 0);
 		an:    out  std_logic_vector(3 downto 0)
 		);
 end LedPosition_BASYS3;
@@ -146,9 +146,6 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
 begin
 
-    --led(7 downto 0) <= currentLedPosition;
-    --editMode <= sw(0);
-
 	--============================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNR
 	--============================================================================
@@ -253,23 +250,6 @@ begin
 			);
 			
 	seg <= sevenSegs;
-	an  <= anodes;		
-					
-	Testing: process(btnC, clk)
-    begin
-        if (btnC = ACTIVE) then
-            led <= (others => '0');
-        elsif (rising_edge(clk)) then
-            if (incrementCurrentLedPositionEnable = ACTIVE) then
-                led(15) <= ACTIVE;
-            end if;
-            if (decrementCurrentLedPositionEnable = ACTIVE) then
-                led(14) <= ACTIVE;
-            end if;
-            if (editModeSync = ACTIVE) then
-                led(13) <= ACTIVE;
-            end if;
-        end if;
-    end process;				
+	an  <= anodes;					
 					
 end LedPosition_BASYS3_ARCH;

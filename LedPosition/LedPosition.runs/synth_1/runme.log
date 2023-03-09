@@ -17,48 +17,48 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 15608
+INFO: [Synth 8-7075] Helper process launched with PID 14952
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1015.699 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1017.332 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'LedPosition_BASYS3' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:33]
 	Parameter CHAIN_SIZE bound to: 2 - type: integer 
-INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_BTNR' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:155]
+INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_BTNR' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:152]
 INFO: [Synth 8-638] synthesizing module 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:27]
 	Parameter CHAIN_SIZE bound to: 2 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'SynchronizerChain' (1#1) [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:27]
 	Parameter CHAIN_SIZE bound to: 2 - type: integer 
-INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_BTNL' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:167]
+INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_BTNL' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:164]
 	Parameter CHAIN_SIZE bound to: 2 - type: integer 
-INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_SW0' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:179]
-INFO: [Synth 8-3491] module 'Debouncer' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:17' bound to instance 'DEBOUNCE_INC' of component 'Debouncer' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:191]
+INFO: [Synth 8-3491] module 'SynchronizerChain' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd:15' bound to instance 'SYNC_SW0' of component 'SynchronizerChain' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:176]
+INFO: [Synth 8-3491] module 'Debouncer' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:17' bound to instance 'DEBOUNCE_INC' of component 'Debouncer' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:188]
 INFO: [Synth 8-638] synthesizing module 'Debouncer' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:26]
 INFO: [Synth 8-256] done synthesizing module 'Debouncer' (2#1) [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:26]
-INFO: [Synth 8-3491] module 'Debouncer' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:17' bound to instance 'DEBOUNCE_DEC' of component 'Debouncer' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:202]
+INFO: [Synth 8-3491] module 'Debouncer' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd:17' bound to instance 'DEBOUNCE_DEC' of component 'Debouncer' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:199]
 	Parameter NUM_OF_LEDS bound to: 16 - type: integer 
 	Parameter NUM_OF_OUTPUT_BITS bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'LedPosition' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd:36' bound to instance 'LED_POSITION_DRIVER' of component 'LedPosition' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:213]
+INFO: [Synth 8-3491] module 'LedPosition' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd:36' bound to instance 'LED_POSITION_DRIVER' of component 'LedPosition' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:210]
 INFO: [Synth 8-638] synthesizing module 'LedPosition' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd:52]
 	Parameter NUM_OF_LEDS bound to: 16 - type: integer 
 	Parameter NUM_OF_OUTPUT_BITS bound to: 8 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'LedPosition' (3#1) [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd:52]
-INFO: [Synth 8-3491] module 'SevenSegmentDriver' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd:22' bound to instance 'SEVEN_SEG_DRIVER' of component 'SevenSegmentDriver' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:239]
+INFO: [Synth 8-3491] module 'SevenSegmentDriver' declared at 'D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd:22' bound to instance 'SEVEN_SEG_DRIVER' of component 'SevenSegmentDriver' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:236]
 INFO: [Synth 8-638] synthesizing module 'SevenSegmentDriver' [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd:44]
 INFO: [Synth 8-256] done synthesizing module 'SevenSegmentDriver' (4#1) [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd:44]
 INFO: [Synth 8-256] done synthesizing module 'LedPosition_BASYS3' (5#1) [D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd:33]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1015.699 ; gain = 0.000
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1017.332 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1015.699 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1017.332 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1015.699 ; gain = 0.000
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1017.332 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1015.699 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1017.332 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -72,26 +72,26 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/LedPosition_BASYS3_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1045.016 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1047.277 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1045.016 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1047.277 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'currentState_reg' in module 'Debouncer'
 ---------------------------------------------------------------------------------------------------
@@ -103,25 +103,25 @@ INFO: [Synth 8-802] inferred FSM for state register 'currentState_reg' in module
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'currentState_reg' using encoding 'sequential' in module 'Debouncer'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input   24 Bit       Adders := 2     
+	   2 Input   23 Bit       Adders := 2     
 	   2 Input   17 Bit       Adders := 1     
 	   2 Input    4 Bit       Adders := 2     
 	   2 Input    2 Bit       Adders := 1     
 +---Registers : 
-	               24 Bit    Registers := 2     
+	               23 Bit    Registers := 2     
 	               17 Bit    Registers := 1     
-	               16 Bit    Registers := 1     
 	                4 Bit    Registers := 1     
 	                2 Bit    Registers := 4     
 	                1 Bit    Registers := 2     
 +---Muxes : 
+	   2 Input   23 Bit        Muxes := 2     
 	   2 Input   17 Bit        Muxes := 1     
 	   2 Input    4 Bit        Muxes := 6     
 	   4 Input    4 Bit        Muxes := 1     
@@ -147,25 +147,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1045.016 ; gain = 29.316
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1047.277 ; gain = 29.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1049.055 ; gain = 33.355
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1048.781 ; gain = 31.449
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1049.605 ; gain = 33.906
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1049.484 ; gain = 32.152
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -183,37 +183,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -231,38 +231,39 @@ Report Cell Usage:
 +------+-------+------+
 |1     |BUFG   |     1|
 |2     |CARRY4 |    16|
-|3     |LUT1   |     3|
-|4     |LUT2   |    51|
+|3     |LUT1   |     1|
+|4     |LUT2   |    48|
 |5     |LUT3   |     4|
-|6     |LUT4   |    17|
+|6     |LUT4   |    13|
 |7     |LUT5   |    20|
-|8     |LUT6   |    12|
-|9     |FDCE   |    84|
+|8     |LUT6   |    16|
+|9     |FDCE   |    79|
 |10    |FDRE   |     2|
 |11    |IBUF   |     5|
-|12    |OBUF   |    27|
+|12    |OBUF   |    11|
+|13    |OBUFT  |    16|
 +------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:24 . Memory (MB): peak = 1056.422 ; gain = 11.406
-Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.422 ; gain = 40.723
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:24 . Memory (MB): peak = 1056.223 ; gain = 8.945
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1056.223 ; gain = 38.891
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1068.492 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1068.293 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 16 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1068.527 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1073.617 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 34 Infos, 1 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1068.527 ; gain = 52.828
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1073.617 ; gain = 56.285
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
 INFO: [Common 17-1381] The checkpoint 'D:/RGB_LEDS/LedPosition/LedPosition.runs/synth_1/LedPosition_BASYS3.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file LedPosition_BASYS3_utilization_synth.rpt -pb LedPosition_BASYS3_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Mar  9 17:19:45 2023...
+INFO: [Common 17-206] Exiting Vivado at Thu Mar  9 17:32:18 2023...
