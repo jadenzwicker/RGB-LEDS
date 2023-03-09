@@ -56,6 +56,8 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     
     signal sevenSegs: std_logic_vector(6 downto 0);
     signal anodes:    std_logic_vector(3 downto 0);
+    
+    signal editModeAsync:                     std_logic;
 
     --============================================================================
     --  LedPosition                                                      COMPONENT
@@ -64,7 +66,7 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 		generic(
             NUM_OF_LEDS:        positive := 16;
             NUM_OF_OUTPUT_BITS: positive := 8
-        );
+            );
         -- All ports are defined as std_logic variants for per standard.
         port(
             reset:                              in  std_logic;
@@ -124,6 +126,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
         );
 	end component SevenSegmentDriver;
 
+    --============================================================================
+    --  to_bcd_8bit                                                       FUNCTION
+    --============================================================================
     function to_bcd_8bit(inputValue: integer) return std_logic_vector is
         variable tensValue: integer;
         variable onesValue: integer;
@@ -141,7 +146,8 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
 begin
 
-    led(7 downto 0) <= currentLedPosition;
+    --led(7 downto 0) <= currentLedPosition;
+    --editMode <= sw(0);
 
 	--============================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNR
@@ -202,32 +208,21 @@ begin
 			);
 			
 	--============================================================================
-	--  Debouncer component being initalized as DEBOUNCER_MODE
-	--============================================================================
-	DEBOUNCE_MODE: Debouncer
-		port map (
-			clock           => clk,
-			reset           => btnC,
-			input           => editModeSync,
-			debouncedInput  => editMode
-			);
-			
-	--============================================================================
 	--  LedPosition component being initalized as LED_POSITION_DRIVER
 	--============================================================================
 	LED_POSITION_DRIVER: LedPosition
 		generic map (
-		    NUM_OF_LEDS        => NUM_OF_LEDS,
-		    NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
-		    )
-		port map (
-			clock                             => clk,
-			reset                             => btnC,
-			incrementCurrentLedPositionEnable => incrementCurrentLedPositionEnable,
-			decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
-			editMode                          => editMode,
-			currentLedPosition                => currentLedPosition
-			);		
+            NUM_OF_LEDS        => NUM_OF_LEDS,
+            NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
+        )
+        port map(
+            reset                             => btnC,
+            clock                             => clk,
+            incrementCurrentLedPositionEnable => incrementCurrentLedPositionEnable,
+            decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
+            editMode                          => editModeSync,
+            currentLedPosition                => currentLedPosition
+        );		
 			
 	--============================================================================
 	--  Implements to_bcd_8bit
@@ -270,6 +265,9 @@ begin
             end if;
             if (decrementCurrentLedPositionEnable = ACTIVE) then
                 led(14) <= ACTIVE;
+            end if;
+            if (editModeSync = ACTIVE) then
+                led(13) <= ACTIVE;
             end if;
         end if;
     end process;				

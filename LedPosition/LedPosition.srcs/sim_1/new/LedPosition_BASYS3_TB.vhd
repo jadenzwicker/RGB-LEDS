@@ -86,47 +86,48 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-    -- Testing During Reset
-        -- editMode not ACTIVE
-        sw(0) <= '0';
-        wait for 10 ns;
-        btnR <= '1';
-        wait for 10 ns;
-        btnL <= '1';
-        wait for 10 ns;
-        btnR <= '0';
-        wait for 10 ns;
-        btnL <= '0';
-        wait for 10 ns;
+--    -- Testing During Reset
+--        -- editMode not ACTIVE
+--        sw(0) <= '0';
+--        wait for 10 ns;
+--        btnR <= '1';
+--        wait for 10 ns;
+--        btnL <= '1';
+--        wait for 10 ns;
+--        btnR <= '0';
+--        wait for 10 ns;
+--        btnL <= '0';
+--        wait for 10 ns;
         
-        -- editMode ACTIVE
-        sw(0) <= '1';
-        wait for 10 ns;
-        btnR <= '1';
-        wait for 10 ns;
-        btnL <= '1';
-        wait for 10 ns;
-        btnR <= '0';
-        wait for 10 ns;
-        btnL <= '0';
-        wait for 10 ns;
+--        -- editMode ACTIVE
+--        sw(0) <= '1';
+--        wait for 10 ns;
+--        btnR <= '1';
+--        wait for 10 ns;
+--        btnL <= '1';
+--        wait for 10 ns;
+--        btnR <= '0';
+--        wait for 10 ns;
+--        btnL <= '0';
+--        wait for 10 ns;
         
-    -- Testing Without Reset
-        sw(0) <= '0';
-        wait for 25 ns;
+--    -- Testing Without Reset
+--        sw(0) <= '0';
+--        wait for 25 ns;
+
+--        -- editMode not ACTIVE
+--        sw(0) <= '0';
+--        wait for 10 ns;
+--        btnR <= '1';
+--        wait for 10 ns;
+--        btnL <= '1';
+--        wait for 10 ns;
+--        btnR <= '0';
+--        wait for 10 ns;
+--        btnL <= '0';
+--        wait for 10 ns;
         
-        -- editMode not ACTIVE
-        sw(0) <= '0';
-        wait for 10 ns;
-        btnR <= '1';
-        wait for 10 ns;
-        btnL <= '1';
-        wait for 10 ns;
-        btnR <= '0';
-        wait for 10 ns;
-        btnL <= '0';
-        wait for 10 ns;
-        
+        wait for 125 ns;
         -- editMode ACTIVE
         sw(0) <= '1';
         wait for 25 ns;
@@ -222,7 +223,6 @@ begin
         wait for 10 ns;
         btnR <= '0';
         wait for 10 ns;
-        
         
         wait;
     end process;

@@ -143,6 +143,21 @@ begin
         decrementCurrentLedPositionEnable <= '0';
         wait for 25 ns;
         
+        -- Testing
+        incrementCurrentLedPositionEnable <= '1';
+        wait for 10 ns;
+        incrementCurrentLedPositionEnable <= '0';
+        wait for 10 ns;
+        incrementCurrentLedPositionEnable <= '1';
+        wait for 10 ns;
+        incrementCurrentLedPositionEnable <= '0';
+        wait for 10 ns;
+        incrementCurrentLedPositionEnable <= '1';
+        wait for 10 ns;
+        incrementCurrentLedPositionEnable <= '0';
+        wait for 10 ns;
+        
+        
         wait;
     end process;
 end LedPosition_TB_ARCH;
