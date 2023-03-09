@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Thu Mar  9 17:16:46 2023
+| Date             : Thu Mar  9 17:20:43 2023
 | Host             : 3304-PC running 64-bit major release  (build 9200)
 | Command          : report_power -file LedPosition_BASYS3_power_routed.rpt -pb LedPosition_BASYS3_power_summary_routed.pb -rpx LedPosition_BASYS3_power_routed.rpx
 | Design           : LedPosition_BASYS3
@@ -52,13 +52,13 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      230 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       82 |     20800 |            0.39 |
-|   CARRY4       |    <0.001 |       18 |      8150 |            0.22 |
-|   Register     |    <0.001 |       90 |     41600 |            0.22 |
+| Clocks         |    <0.001 |        3 |       --- |             --- |
+| Slice Logic    |    <0.001 |      220 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       78 |     20800 |            0.38 |
+|   CARRY4       |    <0.001 |       16 |      8150 |            0.20 |
+|   Register     |    <0.001 |       86 |     41600 |            0.21 |
 |   Others       |     0.000 |       11 |       --- |             --- |
-| Signals        |    <0.001 |      206 |       --- |             --- |
+| Signals        |    <0.001 |      196 |       --- |             --- |
 | I/O            |     0.002 |       32 |       106 |           30.19 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.075 |          |           |                 |
