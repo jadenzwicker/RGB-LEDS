@@ -31,7 +31,7 @@ architecture Debouncer_ARCH of Debouncer is
     constant TIME_BEFORE_ACTIVE: integer := 12;
     signal count: integer range 0 to TIME_BEFORE_ACTIVE := 0;
     signal enable: std_logic;
-    constant COUNT_4HZ: integer := (100000000/50000000)-1;   -- Used to slow down clock
+    constant COUNT_4HZ: integer := (100000000/2)-1;   -- Used to slow down clock
     
     -- Creating State Machine needed type and signals
     type States_t is (WAIT_FOR_PRESS, PULSE, WAIT_FOR_RELEASE);

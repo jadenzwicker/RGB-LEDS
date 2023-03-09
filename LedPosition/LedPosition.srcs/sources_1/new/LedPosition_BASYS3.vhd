@@ -143,14 +143,6 @@ begin
 
     led(7 downto 0) <= currentLedPosition;
 
-    led(10) <= incrementCurrentLedPositionEnable;
-    led(11) <= decrementCurrentLedPositionEnable;
-    led(12) <= editMode;
-    
-    led(13) <= incrementCurrentLedPositionSync;
-    led(14) <= decrementCurrentLedPositionSync;
-    led(15) <= editModeSync;
-
 	--============================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNR
 	--============================================================================
@@ -267,5 +259,19 @@ begin
 			
 	seg <= sevenSegs;
 	an  <= anodes;		
+					
+	Testing: process(btnC, clk)
+    begin
+        if (btnC = ACTIVE) then
+            led <= (others => '0');
+        elsif (rising_edge(clk)) then
+            if (incrementCurrentLedPositionEnable = ACTIVE) then
+                led(15) <= ACTIVE;
+            end if;
+            if (decrementCurrentLedPositionEnable = ACTIVE) then
+                led(14) <= ACTIVE;
+            end if;
+        end if;
+    end process;				
 					
 end LedPosition_BASYS3_ARCH;
