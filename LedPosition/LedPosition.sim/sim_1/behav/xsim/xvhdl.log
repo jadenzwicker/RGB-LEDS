@@ -1,2 +1,4 @@
 INFO: [VRFC 10-163] Analyzing VHDL file "D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd" into library xil_defaultlib
 INFO: [VRFC 10-3107] analyzing entity 'Debouncer'
+INFO: [VRFC 10-163] Analyzing VHDL file "D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_BASYS3_TB.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'LedPosition_BASYS3_TB'

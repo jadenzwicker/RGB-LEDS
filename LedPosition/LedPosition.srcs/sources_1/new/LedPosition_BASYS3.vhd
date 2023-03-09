@@ -40,10 +40,6 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 	constant NUM_OF_OUTPUT_BITS: positive := 8;
 
 	-- Internal Connection Signals
-	signal incrementCurrentLedPositionAsync: std_logic;
-	signal decrementCurrentLedPositionAsync: std_logic;
-    signal editModeAsync:                    std_logic;
-    
     signal incrementCurrentLedPositionSync:  std_logic;
     signal decrementCurrentLedPositionSync:  std_logic;
     signal editModeSync:                     std_logic;
@@ -155,11 +151,6 @@ begin
     led(14) <= decrementCurrentLedPositionSync;
     led(15) <= editModeSync;
 
-    -- Assigning ports to internal signals 
-    incrementCurrentLedPositionAsync <= btnR;
-    decrementCurrentLedPositionAsync <= btnL;
-    editModeAsync                    <= sw(0);
-
 	--============================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNR
 	--============================================================================
@@ -168,7 +159,7 @@ begin
 		port map (
 			clock    => clk,
 			reset    => btnC,
-			asyncIn  => incrementCurrentLedPositionAsync,
+			asyncIn  => btnR,
 			syncOut  => incrementCurrentLedPositionSync
 			);
 
@@ -180,7 +171,7 @@ begin
 		port map (
 			clock    => clk,
 			reset    => btnC,
-			asyncIn  => decrementCurrentLedPositionAsync,
+			asyncIn  => btnL,
 			syncOut  => decrementCurrentLedPositionSync
 			);
 			
@@ -192,7 +183,7 @@ begin
 		port map (
 			clock    => clk,
 			reset    => btnC,
-			asyncIn  => editModeAsync,
+			asyncIn  => sw(0),
 			syncOut  => editModeSync
 			);
 			

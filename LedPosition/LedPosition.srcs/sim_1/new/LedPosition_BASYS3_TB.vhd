@@ -30,6 +30,7 @@ architecture LedPosition_BASYS3_TB_ARCH of LedPosition_BASYS3_TB is
             btnL:  in   std_logic;
             sw:    in   std_logic_vector(15 downto 0);
             seg:   out  std_logic_vector(6 downto 0);
+            led:    out  std_logic_vector(15 downto 0);
             an:    out  std_logic_vector(3 downto 0)
             );
     end component;
@@ -42,6 +43,7 @@ architecture LedPosition_BASYS3_TB_ARCH of LedPosition_BASYS3_TB is
     signal sw:     std_logic_vector(15 downto 0);
     signal seg:    std_logic_vector(6 downto 0);
     signal an:     std_logic_vector(3 downto 0);
+    signal led:     std_logic_vector(15 downto 0);
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
@@ -53,7 +55,8 @@ begin
         btnL => btnL,
         sw   => sw,
         seg  => seg,
-        an   => an
+        an   => an,
+        led  => led
     );
     
     --============================================================================
@@ -135,6 +138,40 @@ begin
         wait for 200 ns;
         btnL <= '0';
         wait for 25 ns;
+        
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        btnR <= '1';
+        wait for 20 ns;
+        btnR <= '0';
+        wait for 20 ns;
+        
         
         wait;
     end process;
