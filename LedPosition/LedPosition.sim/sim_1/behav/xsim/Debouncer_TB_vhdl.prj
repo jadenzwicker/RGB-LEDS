@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../LedPosition.srcs/sources_1/new/Debouncer.vhd" \
+"../../../../LedPosition.srcs/sim_1/new/Debouncer_TB.vhd" \
+
+# Do not sort compile order
+nosort
