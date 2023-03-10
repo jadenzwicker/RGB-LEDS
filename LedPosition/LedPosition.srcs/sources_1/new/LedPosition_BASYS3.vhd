@@ -11,6 +11,16 @@
 --=
 --=     NUM_OF_OUTPUT_BITS must be defined as 8 or greater for this implementation.
 --=
+--=        Asynchronous signals are denoted by the ending 'Async'
+--=        Synchronous signals are denoted by the ending 'Sync'
+--=        Raw or unbounced signals are denoted by the ending 'Unbounce'
+--=        Debounced signals are denoted by the ending 'Debounced'
+--=        Level signals are denoted by the ending 'Level'
+--=        Pulse/Single Press signals are denoted by the ending 'Enable'
+--=        A slower/enable clock signal is denoted by the ending 'Pulse'
+--=        Signals referencing ports are internal signals and are hence denoted with 
+--=        the ending 'IS'
+--=
 --==================================================================================
 
 library ieee;

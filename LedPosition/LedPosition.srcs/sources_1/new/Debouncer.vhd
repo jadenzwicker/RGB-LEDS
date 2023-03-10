@@ -28,6 +28,7 @@ architecture Debouncer_ARCH of Debouncer is
     -- Active High constant implemented for readability.
 	constant ACTIVE:  std_logic := '1';
     
+    -- MAKE THIS A GENERIC
     constant TIME_BEFORE_ACTIVE: integer := 12;
     signal count: integer range 0 to TIME_BEFORE_ACTIVE := 0;
     signal enable: std_logic;
@@ -39,6 +40,26 @@ architecture Debouncer_ARCH of Debouncer is
     signal nextState:    States_t;
 
 begin
+	
+	-- TIPPENS CODE
+--	process(reset, clock)
+--        variable held: std_logic;
+--    begin
+--        if (reset=ACTIVE) then
+--            debouncedInput <= not ACTIVE;
+--            held        := not ACTIVE;
+--        elsif (rising_edge(clock)) then
+--            debouncedInput <= not ACTIVE;
+--            if (input=ACTIVE) then
+--                if (held = not ACTIVE) then
+--                    debouncedInput <= ACTIVE;
+--                    held        := ACTIVE;
+--                end if;
+--            else
+--                held := not ACTIVE;
+--            end if;
+--        end if;
+--    end process;
 	
 	PULSE_GENERATOR: process(reset, clock)
     variable count: integer range 0 to COUNT_4HZ;
