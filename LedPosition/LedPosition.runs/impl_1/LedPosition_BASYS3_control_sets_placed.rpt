@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Fri Mar 10 16:53:12 2023
+| Date         : Sat Mar 11 15:51:39 2023
 | Host         : 3304-PC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file LedPosition_BASYS3_control_sets_placed.rpt
 | Design       : LedPosition_BASYS3
@@ -58,11 +58,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               2 |            2 |
-| No           | No                    | Yes                    |              75 |           20 |
+| No           | No                    | No                     |               2 |            1 |
+| No           | No                    | Yes                    |              75 |           21 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |               4 |            2 |
+| Yes          | No                    | Yes                    |               4 |            1 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -73,9 +73,9 @@ Table of Contents
 +----------------+-------------------+------------------+------------------+----------------+--------------+
 |  Clock Signal  |   Enable Signal   | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------+-------------------+------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG |                   |                  |                2 |              2 |         1.00 |
-|  clk_IBUF_BUFG | DEBOUNCE_INC/E[0] | btnC_IBUF        |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG |                   | btnC_IBUF        |               20 |             75 |         3.75 |
+|  clk_IBUF_BUFG |                   |                  |                1 |              2 |         2.00 |
+|  clk_IBUF_BUFG | DEBOUNCE_INC/E[0] | btnC_IBUF        |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG |                   | btnC_IBUF        |               21 |             75 |         3.57 |
 +----------------+-------------------+------------------+------------------+----------------+--------------+
 
 

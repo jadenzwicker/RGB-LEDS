@@ -42,12 +42,18 @@ end LedPosition_BASYS3;
 
 architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
-	-- Active High constant implemented for readability.
+	-- Active High Constant
 	constant ACTIVE: std_logic := '1';
+	
+	-- LedPosition Constants
 	-- The number of leds on board to be driven
 	constant NUM_OF_LEDS: positive := 16;
 	-- The number of bits needed to represent NUM_OF_LEDS in binary
 	constant NUM_OF_OUTPUT_BITS: positive := 8;
+	
+	-- Debouncer Constants
+    constant TIME_BETWEEN_PULSES: positive := 15;
+    constant CLOCK_FREQUENCY:     positive := 100000000;
 
 	-- Internal Connection Signals
     signal incrementCurrentLedPositionSync:  std_logic;
@@ -105,13 +111,18 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     --  Debouncer                                                        COMPONENT
     --============================================================================
     component Debouncer
+        generic (
+            ACTIVE: std_logic := '1';
+            TIME_BETWEEN_PULSES: positive := 12;       -- In Hz
+            CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
+            );
         port (
             reset:          in  std_logic;
             clock:          in  std_logic;
             input:          in  std_logic;
-            debouncedInput: out std_logic
-        );
-	end component Debouncer;
+            debouncedOutput: out std_logic
+            );
+    end component;
 	
 	--============================================================================
     --  SevenSegmentDriver                                               COMPONENT
@@ -196,22 +207,32 @@ begin
 	--  Debouncer component being initalized as DEBOUNCER_INC
 	--============================================================================
 	DEBOUNCE_INC: Debouncer
+	    generic map (
+            ACTIVE              => ACTIVE,
+            TIME_BETWEEN_PULSES => TIME_BETWEEN_PULSES,
+            CLOCK_FREQUENCY     => CLOCK_FREQUENCY
+            )
 		port map (
 			clock           => clk,
 			reset           => btnC,
 			input           => incrementCurrentLedPositionSync,
-			debouncedInput  => incrementCurrentLedPositionEnable
+			debouncedOutput => incrementCurrentLedPositionEnable
 			);		
 
     --============================================================================
 	--  Debouncer component being initalized as DEBOUNCER_DEC
 	--============================================================================
 	DEBOUNCE_DEC: Debouncer
+	    generic map (
+            ACTIVE              => ACTIVE,
+            TIME_BETWEEN_PULSES => TIME_BETWEEN_PULSES,
+            CLOCK_FREQUENCY     => CLOCK_FREQUENCY
+            )
 		port map (
 			clock           => clk,
 			reset           => btnC,
 			input           => decrementCurrentLedPositionSync,
-			debouncedInput  => decrementCurrentLedPositionEnable
+			debouncedOutput => decrementCurrentLedPositionEnable
 			);
 			
 	--============================================================================
@@ -221,7 +242,7 @@ begin
 		generic map (
             NUM_OF_LEDS        => NUM_OF_LEDS,
             NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
-        )
+            )
         port map(
             reset                             => btnC,
             clock                             => clk,
@@ -229,7 +250,7 @@ begin
             decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
             editMode                          => editModeSync,
             currentLedPosition                => currentLedPosition
-        );		
+            );		
 			
 	--============================================================================
 	--  Implements to_bcd_8bit

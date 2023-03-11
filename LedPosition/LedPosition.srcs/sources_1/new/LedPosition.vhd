@@ -46,7 +46,7 @@ entity LedPosition is
         decrementCurrentLedPositionEnable:  in  std_logic;
         editMode:                           in  std_logic;
         currentLedPosition:                 out std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0)
-    );
+        );
 end LedPosition;
 
 architecture LedPosition_ARCH of LedPosition is
