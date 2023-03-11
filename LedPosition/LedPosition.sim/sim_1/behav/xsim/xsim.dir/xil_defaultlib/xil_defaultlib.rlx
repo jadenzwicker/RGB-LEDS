@@ -3,14 +3,14 @@
 Nov 18 2020
 09:47:47
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/Debouncer_LedPosition_TB.vhd,1678373696,vhdl,,,,debouncer_ledposition_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/Debouncer_TB.vhd,1678566670,vhdl,,,,debouncer_tb,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/Debouncer_TB.vhd,1678573191,vhdl,,,,debouncer_tb,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_BASYS3_TB.vhd,1678566883,vhdl,,,,ledposition_basys3_tb,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_TB.vhd,1678372434,vhdl,,,,ledposition_tb,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/SyncChain_Debouncer_TB.vhd,1678396955,vhdl,,,,syncchain_debouncer_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd,1678566712,vhdl,,,,debouncer,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd,1678573046,vhdl,,,,debouncer,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer_LedPosition.vhd,1678372843,vhdl,,,,debouncer_ledposition,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd,1678560541,vhdl,,,,ledposition,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd,1678565671,vhdl,,,,ledposition_basys3,,,,,,,,
+D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd,1678567811,vhdl,,,,ledposition_basys3,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd,1678485480,vhdl,,,,sevensegmentdriver,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SyncChain_Debouncer.vhd,1678396934,vhdl,,,,syncchain_debouncer,,,,,,,,
 D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd,1678485480,vhdl,,,,synchronizerchain,,,,,,,,

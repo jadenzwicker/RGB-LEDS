@@ -19,11 +19,10 @@
 --=
 --=      Generic input definitions are described as follows:
 --=          ACTIVE: a constant that is of type std_logic. Should only be defined as '1'
---=                  or '0' according to an active LOW or HIGH system with 1 
---=                  corresponding to HIGH and vice versa.
+--=                  or '0' according to an active LOW or HIGH system.
 --=
 --=          TIME_BETWEEN_PULSES: a constant that is of type positive. It defines the 
---=                               amount of time seperating possible pulses sent out.
+--=                               delay between possible pulses being sent out.
 --=                               This is described in real time Hz.
 --=
 --=          CLOCK_FREQUENCY: a constant that is of type positive defining the clock 
@@ -43,9 +42,9 @@ entity Debouncer is
         CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
         );
     port (
-    	reset:          in  std_logic;
-        clock:          in  std_logic;
-    	input:          in  std_logic;
+    	reset:           in  std_logic;
+        clock:           in  std_logic;
+    	input:           in  std_logic;
         debouncedOutput: out std_logic
         );
 end Debouncer;
@@ -54,8 +53,8 @@ architecture Debouncer_ARCH of Debouncer is
    
     signal pulse: std_logic;
     
-    -- Calculating the count per clock cycle needed to achieve the desired pulse frequency.
-    constant COUNT_BETWEEN_PULSES: integer := (CLOCK_FREQUENCY/TIME_BETWEEN_PULSES)-1;
+  -- Calculating the count per clock cycle needed to achieve the desired pulse frequency.
+    constant COUNT_BETWEEN_PULSES: natural := (CLOCK_FREQUENCY/TIME_BETWEEN_PULSES) - 1;
     
     -- Creating needed type and signals for state machine.
     type States_t is (WAIT_FOR_INPUT, OUTPUT, WAIT_FOR_CONDITIONS);
@@ -63,32 +62,12 @@ architecture Debouncer_ARCH of Debouncer is
     signal nextState:    States_t;
 
 begin
-	
-	-- TIPPENS CODE
---	process(reset, clock)
---        variable held: std_logic;
---    begin
---        if (reset=ACTIVE) then
---            debouncedInput <= not ACTIVE;
---            held        := not ACTIVE;
---        elsif (rising_edge(clock)) then
---            debouncedInput <= not ACTIVE;
---            if (input=ACTIVE) then
---                if (held = not ACTIVE) then
---                    debouncedInput <= ACTIVE;
---                    held        := ACTIVE;
---                end if;
---            else
---                held := not ACTIVE;
---            end if;
---        end if;
---    end process;
 
 	--===================================================================================
     -- Pulse Generator                                                            PROCESS
     --===================================================================================
 	PULSE_GENERATOR: process(reset, clock)
-    variable count: integer range 0 to COUNT_BETWEEN_PULSES;
+    variable count: natural range 0 to COUNT_BETWEEN_PULSES;
     begin
         if (reset = ACTIVE) then
             count := 0;
@@ -104,7 +83,7 @@ begin
     end process PULSE_GENERATOR;
     
     --===================================================================================
-    -- State register                                                             PROCESS
+    -- State Register                                                             PROCESS
     --===================================================================================
     STATE_REGISTER: process(reset, clock)
     begin
@@ -116,7 +95,7 @@ begin
     end process;
     
     --===================================================================================
-    -- State transitions                                                          PROCESS
+    -- State Transitions                                                          PROCESS
     --===================================================================================
     STATE_TRANSITION: process(currentState, input, pulse)
     begin
@@ -126,10 +105,8 @@ begin
         
         case currentState is
             when WAIT_FOR_INPUT =>
-                if (input = '1') then
+                if (input = ACTIVE) then
                     nextState <= OUTPUT;
-                else
-                    nextState <= WAIT_FOR_INPUT;
                 end if;
                 
             when OUTPUT =>
@@ -139,8 +116,6 @@ begin
             when WAIT_FOR_CONDITIONS => 
                 if (input = not ACTIVE) and (pulse = ACTIVE) then
                     nextState <= WAIT_FOR_INPUT;
-                else
-                    nextState <= WAIT_FOR_CONDITIONS;
                 end if;
             
         end case;

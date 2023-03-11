@@ -1,27 +1,25 @@
---==================================================================================
+--=======================================================================================
 --=
---= Name: LedPosition_BASYS3
---= University: Kennesaw State University
---= Designer: Jaden Zwicker
+--=  Name: LedPosition_BASYS3
+--=  University: Kennesaw State University
+--=  Designer: Jaden Zwicker
 --=
---=     Basys3 wrapper for LedPosition component. Utilizes other componets such as:
---=         SynchronizerChain
---=         Debouncer
---=         SevenSegmentDriver
+--=      Basys3 wrapper for LedPosition component. Utilizes other componets such as:
+--=          SynchronizerChain
+--=          Debouncer
+--=          SevenSegmentDriver
 --=
---=     NUM_OF_OUTPUT_BITS must be defined as 8 or greater for this implementation.
+--=      ~    Asynchronous signals are denoted by the ending 'Async'
+--=      ~    Synchronous signals are denoted by the ending 'Sync'
+--=      ~    Raw or unbounced signals are denoted by the ending 'Unbounce'
+--=      ~    Debounced signals are denoted by the ending 'Debounced'
+--=      ~    Level signals are denoted by the ending 'Level'
+--=      ~    Pulse/Single Press signals are denoted by the ending 'Enable'
+--=      ~    A slower/enable clock signal is denoted by the ending 'Pulse'
+--=      ~    Signals referencing ports are internal signals and are hence denoted with 
+--=           the ending 'IS'
 --=
---=        Asynchronous signals are denoted by the ending 'Async'
---=        Synchronous signals are denoted by the ending 'Sync'
---=        Raw or unbounced signals are denoted by the ending 'Unbounce'
---=        Debounced signals are denoted by the ending 'Debounced'
---=        Level signals are denoted by the ending 'Level'
---=        Pulse/Single Press signals are denoted by the ending 'Enable'
---=        A slower/enable clock signal is denoted by the ending 'Pulse'
---=        Signals referencing ports are internal signals and are hence denoted with 
---=        the ending 'IS'
---=
---==================================================================================
+--=======================================================================================
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -75,9 +73,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
     
     signal editModeAsync:                     std_logic;
 
-    --============================================================================
-    --  LedPosition                                                      COMPONENT
-    --============================================================================
+    --===================================================================================
+    --  LedPosition                                                             COMPONENT
+    --===================================================================================
     component LedPosition
 		generic(
             NUM_OF_LEDS:        positive := 16;
@@ -90,13 +88,13 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
             incrementCurrentLedPositionEnable:  in  std_logic;
             decrementCurrentLedPositionEnable:  in  std_logic;
             editMode:                           in  std_logic;
-            currentLedPosition:                 out std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0)
+            currentLedPosition:     out std_logic_vector(NUM_OF_OUTPUT_BITS - 1 downto 0)
         );
 	end component LedPosition;
 
-    --============================================================================
-    --  SynchronizerChain                                                COMPONENT
-    --============================================================================
+    --===================================================================================
+    --  SynchronizerChain                                                       COMPONENT
+    --===================================================================================
 	component SynchronizerChain
 		generic (CHAIN_SIZE: positive);
         port (
@@ -107,9 +105,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
         );
 	end component SynchronizerChain;
 
-    --============================================================================
-    --  Debouncer                                                        COMPONENT
-    --============================================================================
+    --===================================================================================
+    --  Debouncer                                                               COMPONENT
+    --===================================================================================
     component Debouncer
         generic (
             ACTIVE: std_logic := '1';
@@ -124,9 +122,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
             );
     end component;
 	
-	--============================================================================
-    --  SevenSegmentDriver                                               COMPONENT
-    --============================================================================
+	--===================================================================================
+    --  SevenSegmentDriver                                                      COMPONENT
+    --===================================================================================
 	component SevenSegmentDriver
 		port(
             reset: in std_logic;
@@ -147,9 +145,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
         );
 	end component SevenSegmentDriver;
 
-    --============================================================================
-    --  to_bcd_8bit                                                       FUNCTION
-    --============================================================================
+    --===================================================================================
+    --  to_bcd_8bit                                                              FUNCTION
+    --===================================================================================
     function to_bcd_8bit(inputValue: integer) return std_logic_vector is
         variable tensValue: integer;
         variable onesValue: integer;
@@ -167,9 +165,9 @@ architecture LedPosition_BASYS3_ARCH of LedPosition_BASYS3 is
 
 begin
 
-	--============================================================================
+	--===================================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNR
-	--============================================================================
+	--===================================================================================
 	SYNC_BTNR: SynchronizerChain
 		generic map (2)
 		port map (
@@ -179,9 +177,9 @@ begin
 			syncOut  => incrementCurrentLedPositionSync
 			);
 
-    --============================================================================
+    --===================================================================================
 	--  SynchronizerChain component being initalized as SYNC_BTNL
-	--============================================================================
+	--===================================================================================
 	SYNC_BTNL: SynchronizerChain
 		generic map (2)
 		port map (
@@ -191,9 +189,9 @@ begin
 			syncOut  => decrementCurrentLedPositionSync
 			);
 			
-	--============================================================================
+	--===================================================================================
 	--  SynchronizerChain component being initalized as SYNC_SW0
-	--============================================================================
+	--===================================================================================
 	SYNC_SW0: SynchronizerChain
 		generic map (2)
 		port map (
@@ -203,9 +201,9 @@ begin
 			syncOut  => editModeSync
 			);
 			
-	--============================================================================
+	--===================================================================================
 	--  Debouncer component being initalized as DEBOUNCER_INC
-	--============================================================================
+	--===================================================================================
 	DEBOUNCE_INC: Debouncer
 	    generic map (
             ACTIVE              => ACTIVE,
@@ -219,9 +217,9 @@ begin
 			debouncedOutput => incrementCurrentLedPositionEnable
 			);		
 
-    --============================================================================
+    --===================================================================================
 	--  Debouncer component being initalized as DEBOUNCER_DEC
-	--============================================================================
+	--===================================================================================
 	DEBOUNCE_DEC: Debouncer
 	    generic map (
             ACTIVE              => ACTIVE,
@@ -235,9 +233,9 @@ begin
 			debouncedOutput => decrementCurrentLedPositionEnable
 			);
 			
-	--============================================================================
+	--===================================================================================
 	--  LedPosition component being initalized as LED_POSITION_DRIVER
-	--============================================================================
+	--===================================================================================
 	LED_POSITION_DRIVER: LedPosition
 		generic map (
             NUM_OF_LEDS        => NUM_OF_LEDS,
@@ -252,18 +250,18 @@ begin
             currentLedPosition                => currentLedPosition
             );		
 			
-	--============================================================================
+	--===================================================================================
 	--  Implements to_bcd_8bit
 	--  currentLedPosition is converted to bcd values and each bcd digit is then
 	--  assigned accordingly. 
-	--============================================================================	
+	--===================================================================================
 	tempDigits <= to_bcd_8bit(to_integer(unsigned(currentLedPosition)));
 	digit1 <= tempDigits(7 downto 4);    -- tens place
 	digit0 <= tempDigits(3 downto 0);    -- ones place
 	
-	--============================================================================
+	--===================================================================================
 	--  SevenSegmentDriver component being initalized as SEVEN_SEG_DRIVER
-	--============================================================================
+	--===================================================================================
 	SEVEN_SEG_DRIVER: SevenSegmentDriver
 		port map (
 			clock     => clk,
@@ -280,6 +278,7 @@ begin
 			anodes    => anodes
 			);
 			
+	-- Assigning output ports		
 	seg <= sevenSegs;
 	an  <= anodes;					
 					

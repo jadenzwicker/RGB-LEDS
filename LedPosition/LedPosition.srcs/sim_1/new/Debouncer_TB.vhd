@@ -38,9 +38,9 @@ architecture Debouncer_TB_ARCH of Debouncer_TB is
     end component;
     
     --uut-signals-------------------------------------------SIGNALS
-    signal reset:          std_logic;
-    signal clock:          std_logic;
-    signal input:          std_logic;
+    signal reset:           std_logic;
+    signal clock:           std_logic;
+    signal input:           std_logic;
     signal debouncedOutput: std_logic;
     
 begin
@@ -86,6 +86,23 @@ begin
     TEST_CASE_DRIVER: process
     begin
         
+        -- During reset testing
+        for i in 5 downto 0 loop
+            input <= '1';
+            wait for 10 ns ;
+            input <= '0';
+            wait for 10 ns ;
+        end loop;
+        
+        -- Long input testing
+        input <= '0';
+        wait for 100 ns ;
+        input <= '1';
+        wait for 250 ns ;
+        input <= '0';
+        wait for 10 ns ;
+        
+        -- Pulse testing
         for i in 100 downto 0 loop
             input <= '1';
             wait for 10 ns ;
