@@ -51,9 +51,9 @@ begin
     --Unit-Under-Test-------------------------------------------UUT
     UUT: LedPosition
     generic map (
-    NUM_OF_LEDS        => NUM_OF_LEDS,
-    NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
-    )
+        NUM_OF_LEDS        => NUM_OF_LEDS,
+        NUM_OF_OUTPUT_BITS => NUM_OF_OUTPUT_BITS
+        )
     port map(
         reset                             => reset,
         clock                             => clock,
@@ -61,7 +61,7 @@ begin
         decrementCurrentLedPositionEnable => decrementCurrentLedPositionEnable,
         editMode                          => editMode,
         currentLedPosition                => currentLedPosition
-    );
+        );
     
     --============================================================================
     --  Reset        "Allows for all possibilities to be tested during reset time"

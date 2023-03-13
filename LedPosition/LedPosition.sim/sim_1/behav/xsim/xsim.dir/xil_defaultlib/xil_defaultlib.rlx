@@ -2,15 +2,9 @@
 2020.2
 Nov 18 2020
 09:47:47
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/Debouncer_LedPosition_TB.vhd,1678373696,vhdl,,,,debouncer_ledposition_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/Debouncer_TB.vhd,1678319502,vhdl,,,,debouncer_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_BASYS3_TB.vhd,1678400922,vhdl,,,,ledposition_basys3_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_TB.vhd,1678372434,vhdl,,,,ledposition_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/SyncChain_Debouncer_TB.vhd,1678396955,vhdl,,,,syncchain_debouncer_tb,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd,1678401396,vhdl,,,,debouncer,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer_LedPosition.vhd,1678372843,vhdl,,,,debouncer_ledposition,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd,1678151072,vhdl,,,,ledposition,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd,1678401062,vhdl,,,,ledposition_basys3,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd,1678141429,vhdl,,,,sevensegmentdriver,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SyncChain_Debouncer.vhd,1678396934,vhdl,,,,syncchain_debouncer,,,,,,,,
-D:/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd,1678141372,vhdl,,,,synchronizerchain,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sim_1/new/LedPosition_BASYS3_TB.vhd,1678730112,vhdl,,,,ledposition_basys3_tb,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/Debouncer.vhd,1678724721,vhdl,,,,debouncer,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition.vhd,1678729245,vhdl,,,,ledposition,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/LedPosition_BASYS3.vhd,1678730145,vhdl,,,,ledposition_basys3,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SevenSegmentDriver.vhd,1678724709,vhdl,,,,sevensegmentdriver,,,,,,,,
+C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/LedPosition/LedPosition.srcs/sources_1/new/SynchronizerChain.vhd,1678724709,vhdl,,,,synchronizerchain,,,,,,,,
