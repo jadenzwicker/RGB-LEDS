@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1678575577">
   <File Type="PA-TCL" Name="LedPosition_BASYS3.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="LedPosition_BASYS3_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="LedPosition_BASYS3_reports.tcl"/>
   <File Type="RDS-RDS" Name="LedPosition_BASYS3.vds"/>
   <File Type="RDS-UTIL" Name="LedPosition_BASYS3_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="LedPosition_BASYS3_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="LedPosition_BASYS3.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="LedPosition_BASYS3_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="LedPosition_BASYS3_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/Debouncer.vhd">
@@ -65,7 +62,7 @@
     <Filter Type="Constrs"/>
     <File Path="$PSRCDIR/constrs_1/imports/Downloads/Basys3ConfigFile.xdc">
       <FileInfo>
-        <Attr Name="ImportPath" Val="C:/Users/Administrator/Downloads/Basys3ConfigFile.xdc"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Administrator/Downloads/Basys3ConfigFile.xdc"/>
         <Attr Name="ImportTime" Val="1678117661"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

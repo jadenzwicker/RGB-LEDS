@@ -4,7 +4,7 @@
 --= University: Kennesaw State University
 --= Designer: Jaden Zwicker
 --=
---=     Test Bench for LedPosition component
+--=     Test Bench for LedPosition_BASYS3 component
 --=
 --==================================================================================
 
@@ -17,8 +17,6 @@ end LedPosition_BASYS3_TB;
 
 architecture LedPosition_BASYS3_TB_ARCH of LedPosition_BASYS3_TB is
     
-    -- Creating Constant for the NUM_OF_LEDS being tested up to, used in signal
-    -- definition and generic map definition.
     constant ACTIVE: std_logic := '1';
     
     --unit-under-test-------------------------------------COMPONENT

@@ -29,7 +29,7 @@
 --=                  or '0' according to an active LOW or HIGH system.
 --=
 --=          NUM_OF_LEDS: a constant that is of type positive. Describes the physical 
---=                       number of LEDs the system is controlling.
+--=                       number of LEDs the system is controlling/driving.
 --=
 --=          NUM_OF_OUTPUT_BITS: a constant that is of type positive. It defines the 
 --=                             number of bits needed to represent NUM_OF_LEDS in binary.
