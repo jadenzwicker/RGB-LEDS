@@ -2,5 +2,8 @@
 2020.2
 Nov 18 2020
 09:47:47
-D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sim_1/new/BitEncoder_TB.vhd,1679583450,vhdl,,,,bitencoder_tb,,,,,,,,
+D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sim_1/new/ASCII_WAVE_TB.vhd,1679585498,vhdl,,,,ascii_wave_tb,,,,,,,,
+D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sim_1/new/BitEncoder_TB.vhd,1679585945,vhdl,,,,bitencoder_tb,,,,,,,,
+D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sources_1/imports/new/ColorConverter.vhd,1679583788,vhdl,,,,colorconverter,,,,,,,,
+D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sources_1/new/ASCII_WAVE.vhd,1679584938,vhdl,,,,ascii_wave,,,,,,,,
 D:/RGB_LEDS/BitEncoder/BitEncoder.srcs/sources_1/new/BitEncoder.vhd,1679583601,vhdl,,,,bitencoder,,,,,,,,

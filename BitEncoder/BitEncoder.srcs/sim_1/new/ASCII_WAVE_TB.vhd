@@ -1,6 +1,6 @@
 --==================================================================================
 --=
---=  Name: BitEncoder_TB
+--=  Name: ASCII_WAVE_TB
 --=  University: Kennesaw State University
 --=  Designer: Jaden Zwicker
 --=
@@ -12,10 +12,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity BitEncoder_TB is
-end BitEncoder_TB;
+entity ASCII_WAVE_TB is
+end ASCII_WAVE_TB;
 
-architecture BitEncoder_TB_ARCH of BitEncoder_TB is
+architecture ASCII_WAVE_TB_ARCH of ASCII_WAVE_TB is
     
     constant ACTIVE: std_logic := '1';
     constant PULSE_TIME:       positive := 40;
@@ -24,43 +24,31 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     
     
     --unit-under-test-------------------------------------COMPONENT
-    component BitEncoder
-        generic (
-            ACTIVE: std_logic := '1';
-            PULSE_TIME:          positive := 400;      -- In ns
-            NUM_OF_DATA_BITS:    positive := 24;
-            CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
-            );
-        port (
-            reset:    in  std_logic;
-            clock:    in  std_logic;
-            txEn:     in  std_logic;
-            data:     in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
-            waveform: out std_logic
+    component ASCII_WAVE
+        port(
+            clk:      in   std_logic;
+            btnC:     in   std_logic;
+            sw:       in   std_logic_vector(15 downto 0);
+            seg:      out  std_logic_vector(6 downto 0);
+            waveform: out  std_logic
             );
     end component;
     
     --uut-signals-------------------------------------------SIGNALS
-    signal reset:    std_logic;
-    signal clock:    std_logic;
-    signal txEn:     std_logic;
-    signal data:     std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
+    signal clk:      std_logic;
+    signal btnC:     std_logic;
+    signal sw:       std_logic_vector(15 downto 0);
+    signal seg:      std_logic_vector(6 downto 0);
     signal waveform: std_logic;
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
-    UUT: BitEncoder
-    generic map (
-        ACTIVE           => ACTIVE,
-        PULSE_TIME       => PULSE_TIME,
-        NUM_OF_DATA_BITS => NUM_OF_DATA_BITS,
-        CLOCK_FREQUENCY  => CLOCK_FREQUENCY
-        )
+    UUT: ASCII_WAVE
     port map(
-        reset    => reset,
-        clock    => clock,
-        txEn     => txEn,
-        data     => data,
+        clk      => clk,
+        btnC     => btnC,
+        sw       => sw,
+        seg      => seg,
         waveform => waveform
         );
 
@@ -69,9 +57,9 @@ begin
     --============================================================================
     SYSTEM_CLOCK: process
     begin
-        clock <= not ACTIVE;
+        clk <= not ACTIVE;
         wait for 5 ns;
-        clock <= ACTIVE;
+        clk <= ACTIVE;
         wait for 5 ns;
     end process SYSTEM_CLOCK;
     
@@ -91,18 +79,13 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        data <= "000000001111111100000000";
-        txEn <= ACTIVE;
+        sw(7 downto 0) <= "01100101";    -- Green
+        sw(15) <= ACTIVE;
         wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
-        txEn <= not ACTIVE;
+        sw(15) <= not ACTIVE;
         
         wait for 100 ns;
         
-        data <= "000000000000000000000000";
-        txEn <= ACTIVE;
-        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
-        txEn <= not ACTIVE;
-        
         wait;
     end process;
-end BitEncoder_TB_ARCH;
+end ASCII_WAVE_TB_ARCH;
