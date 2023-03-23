@@ -1,7 +1,7 @@
-Running: xsim.dir/BitEncoder_TB_behav/xsimk.exe -simmode gui -wdb BitEncoder_TB_behav.wdb -simrunnum 0 -socket 55658
+Running: xsim.dir/BitEncoder_TB_behav/xsimk.exe -simmode gui -wdb BitEncoder_TB_behav.wdb -simrunnum 0 -socket 56409
 Design successfully loaded
-Design Loading Memory Usage: 7292 KB (Peak: 7292 KB)
-Design Loading CPU Usage: 30 ms
+Design Loading Memory Usage: 7312 KB (Peak: 7312 KB)
+Design Loading CPU Usage: 46 ms
 Simulation completed
-Simulation Memory Usage: 7844 KB (Peak: 7844 KB)
-Simulation CPU Usage: 46 ms
+Simulation Memory Usage: 7868 KB (Peak: 7868 KB)
+Simulation CPU Usage: 61 ms

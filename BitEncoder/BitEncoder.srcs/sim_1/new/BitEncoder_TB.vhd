@@ -1,10 +1,10 @@
 --==================================================================================
 --=
---=  Name: Debouncer_TB
+--=  Name: BitEncoder_TB
 --=  University: Kennesaw State University
 --=  Designer: Jaden Zwicker
 --=
---=      Test Bench for Debouncer generic component
+--=      Test Bench for BitEncoder generic component
 --=
 --==================================================================================
 
@@ -18,8 +18,9 @@ end BitEncoder_TB;
 architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     
     constant ACTIVE: std_logic := '1';
-    constant PULSE_TIME:      positive := 40;
-    constant CLOCK_FREQUENCY: positive := 100000000;
+    constant PULSE_TIME:       positive := 40;
+    constant NUM_OF_DATA_BITS: positive := 24;
+    constant CLOCK_FREQUENCY:  positive := 100000000;
     
     
     --unit-under-test-------------------------------------COMPONENT
@@ -27,13 +28,14 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
         generic (
             ACTIVE: std_logic := '1';
             PULSE_TIME:          positive := 400;      -- In ns
+            NUM_OF_DATA_BITS:    positive := 24;
             CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
             );
         port (
             reset:    in  std_logic;
             clock:    in  std_logic;
             txEn:     in  std_logic;
-            data:     in  std_logic_vector(7 downto 0);
+            data:     in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
             waveform: out std_logic
             );
     end component;
@@ -42,16 +44,17 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     signal reset:    std_logic;
     signal clock:    std_logic;
     signal txEn:     std_logic;
-    signal data:     std_logic_vector(7 downto 0);
+    signal data:     std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
     signal waveform: std_logic;
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
     UUT: BitEncoder
     generic map (
-        ACTIVE          => ACTIVE,
-        PULSE_TIME      => PULSE_TIME,
-        CLOCK_FREQUENCY => CLOCK_FREQUENCY
+        ACTIVE           => ACTIVE,
+        PULSE_TIME       => PULSE_TIME,
+        NUM_OF_DATA_BITS => NUM_OF_DATA_BITS,
+        CLOCK_FREQUENCY  => CLOCK_FREQUENCY
         )
     port map(
         reset    => reset,
@@ -88,25 +91,17 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
+        data <= "111111111111111111111111";
+        txEn <= ACTIVE;
+        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
+        txEn <= not ACTIVE;
         
-        data <= "00001010";
-        txEn <= ACTIVE;
-        wait for 955 ns;   -- time to transmit 8 bits at slowed down rate
-        txEn <= not ACTIVE;
         wait for 100 ns;
-        data <= "11111111";
+        
+        data <= "000000000000000000000000";
         txEn <= ACTIVE;
-        wait for 955 ns;
+        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
         txEn <= not ACTIVE;
-         
---        -- During reset testing
---        for i in 5 downto 0 loop
---            input <= '1';
---            wait for 10 ns ;
---            input <= '0';
---            wait for 10 ns ;
---        end loop;
---        ;
         
         wait;
     end process;
