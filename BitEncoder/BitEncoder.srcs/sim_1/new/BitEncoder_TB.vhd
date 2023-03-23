@@ -91,18 +91,11 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        data <= "000000001111111100000000";
+        data <= "010101010101010101010101";
         txEn <= ACTIVE;
         wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
         txEn <= not ACTIVE;
-        
-        wait for 100 ns;
-        
-        data <= "000000000000000000000000";
-        txEn <= ACTIVE;
-        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
-        txEn <= not ACTIVE;
-        
+      
         wait;
     end process;
 end BitEncoder_TB_ARCH;

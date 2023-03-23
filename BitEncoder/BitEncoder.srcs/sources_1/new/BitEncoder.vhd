@@ -66,7 +66,7 @@ architecture BitEncoder_ARCH of BitEncoder is
   -- Converts given time in ns to Hz and find the count of clock cycles needed to wait
   -- the given time. '- 1' is due to count starting at 0.
     constant COUNT_TO_PULSE: natural := (CLOCK_FREQUENCY/(10**9/PULSE_TIME)) - 1;
-    constant COUNT_TO_END: natural := ((COUNT_TO_PULSE + 1) * 3) - 1;
+    constant COUNT_TO_END:   natural := ((COUNT_TO_PULSE + 1) * 3) - 1;
     
     -- Creating needed type and signals for transmit state machine.
     type Tx_States_t is (WAIT_FOR_EN, FIRST_1, FIRST_0, SECOND_1, SECOND_0, THIRD);
@@ -97,7 +97,11 @@ begin
                 end if;
                 
            -- the extra - 1 is to account for the delay in Bit Gen to change the selected bit
-                if (count2 = COUNT_TO_END - 1) then  
+           -- MINUS 1 CAUSES ISSUE WHERE IT SKIPS A BIT AFTER AWHILE CAUSE COUNT IS TOO SMALL
+           -- BUT NOT MINUS 1 HAS DELAY ISSUES WTFFFF
+           -- No -1 first bit does not chnage
+           -- Yes -1 you skip bits eventually over long time
+                if (count2 = (COUNT_TO_END)) then
                     count2 := 0;
                     txDone <= ACTIVE;
                 else
@@ -179,18 +183,21 @@ begin
                 end if;  
                   
             when SECOND_1 => 
+                start <= ACTIVE;
                 waveform <= ACTIVE; 
                 if (goNextState = ACTIVE) then
                     nextState <= THIRD;
                 end if;
                 
             when SECOND_0 => 
+                start <= ACTIVE;
                 waveform <= not ACTIVE; 
                 if (goNextState = ACTIVE) then
                     nextState <= THIRD;
                 end if;    
                 
             when THIRD => 
+                start <= ACTIVE;
                 waveform <= not ACTIVE;
                 if (txEn = not ACTIVE) and (goNextState = ACTIVE) then
                     nextState <= WAIT_FOR_EN;
