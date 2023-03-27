@@ -59,17 +59,18 @@ end BitEncoder;
 architecture BitEncoder_ARCH of BitEncoder is
    
     signal goNextState: std_logic;
-    signal start:       std_logic;
     signal txDone:      std_logic;
     signal dataBit:     std_logic;
+    signal thirdNextState:     std_logic;
+    signal start:   std_logic;
     
   -- Converts given time in ns to Hz and find the count of clock cycles needed to wait
   -- the given time. '- 1' is due to count starting at 0.
     constant COUNT_TO_PULSE: natural := (CLOCK_FREQUENCY/(10**9/PULSE_TIME)) - 1;
-    constant COUNT_TO_END:   natural := ((COUNT_TO_PULSE + 1) * 3) - 1;
+    constant COUNT_TO_PULSE_THIRD:   natural := 38;
     
     -- Creating needed type and signals for transmit state machine.
-    type Tx_States_t is (WAIT_FOR_EN, FIRST_1, FIRST_0, SECOND_1, SECOND_0, THIRD);
+    type Tx_States_t is (WAIT_FOR_EN, FIRST, SECOND, THIRD, DONE);
     signal currentState: Tx_States_t;
     signal nextState:    Tx_States_t;
 
@@ -79,41 +80,50 @@ begin
     -- Pulse Generator Encoder                                                    PROCESS
     --===================================================================================
     PULSE_GEN_ENCODER: process(reset, clock)
-    variable count1: natural range 0 to COUNT_TO_PULSE;
-    variable count2: natural range 0 to COUNT_TO_END;
+    variable count: natural range 0 to COUNT_TO_PULSE;
     begin
         if (reset = ACTIVE) then
-            count1 := 0;
-            count2 := 0;
+            count := 0;
         elsif (rising_edge(clock)) then
-            -- Eliminates register delay in start signal being sent
-            if (nextState = FIRST_1) or (nextState = FIRST_0) or (start = ACTIVE) then    
-                if (count1 = COUNT_TO_PULSE) then
-                    count1 := 0;
+            -- Manages goNextState Pulse
+            if (nextState /= WAIT_FOR_EN) or (start = ACTIVE) then    
+                if (count = COUNT_TO_PULSE) then
+                    count := 0;
                     goNextState <= ACTIVE;
                 else
-                    count1 := count1 + 1;
+                    count := count + 1;
                     goNextState <= not ACTIVE; 
                 end if;
-                
-           -- the extra - 1 is to account for the delay in Bit Gen to change the selected bit
-           -- MINUS 1 CAUSES ISSUE WHERE IT SKIPS A BIT AFTER AWHILE CAUSE COUNT IS TOO SMALL
-           -- BUT NOT MINUS 1 HAS DELAY ISSUES WTFFFF
-           -- No -1 first bit does not chnage
-           -- Yes -1 you skip bits eventually over long time
-                if (count2 = (COUNT_TO_END)) then
-                    count2 := 0;
-                    txDone <= ACTIVE;
-                else
-                    count2 := count2 + 1;
-                    txDone <= not ACTIVE; 
-                end if;
             else
-                count1 := 0;
-                count2 := 0;   
+                count := 0; 
             end if;         
         end if;
     end process PULSE_GEN_ENCODER;
+    
+    
+    --===================================================================================
+    -- Pulse Generator Encoder                                                    PROCESS
+    --===================================================================================
+    PULSE_GEN_THIRD: process(reset, clock)
+    variable count: natural range 0 to COUNT_TO_PULSE_THIRD;
+    begin
+        if (reset = ACTIVE) then
+            count := 0;
+        elsif (rising_edge(clock)) then
+            -- Manages thirdNextState Pulse
+            if (nextState = THIRD) or (nextState = DONE) or (currentState = THIRD) or (currentState = DONE) then    
+                if (count = COUNT_TO_PULSE_THIRD) then
+                    count := 0;
+                    thirdNextState <= ACTIVE;
+                else
+                    count := count + 1;
+                    thirdNextState <= not ACTIVE; 
+                end if;  
+            else
+                count := 0; 
+            end if;          
+        end if;
+    end process PULSE_GEN_THIRD;
     
     
     --===================================================================================
@@ -158,54 +168,46 @@ begin
         -- Defaults
         waveform <= not ACTIVE;
         nextState <= currentState;
+        start <= ACTIVE;
         
         case currentState is
             when WAIT_FOR_EN =>
                 start <= not ACTIVE;
-                if (txEn = ACTIVE) and (dataBit = ACTIVE) then
-                    nextState <= FIRST_1;
-                elsif (txEn = ACTIVE) and (dataBit = not ACTIVE) then
-                    nextState <= FIRST_0;
+                if (txEn = ACTIVE) then
+                    nextState <= FIRST;
                 end if;
                 
-            when FIRST_1 =>
-                start <= ACTIVE;
+            when FIRST =>
                 waveform <= ACTIVE; 
                 if (goNextState = ACTIVE) then
-                    nextState <= SECOND_1;
+                    nextState <= SECOND;
                 end if;
                 
-            when FIRST_0 =>
-                start <= ACTIVE;
-                waveform <= ACTIVE;     
-                if (goNextState = ACTIVE) then
-                    nextState <= SECOND_0;
-                end if;  
-                  
-            when SECOND_1 => 
-                start <= ACTIVE;
-                waveform <= ACTIVE; 
+            when SECOND => 
+                if (dataBit = '1') then   -- should not be active constant
+                    waveform <= ACTIVE; 
+                elsif (dataBit = '0') then
+                    waveform <= not ACTIVE;    
+                end if;
+                
                 if (goNextState = ACTIVE) then
                     nextState <= THIRD;
                 end if;
-                
-            when SECOND_0 => 
-                start <= ACTIVE;
-                waveform <= not ACTIVE; 
-                if (goNextState = ACTIVE) then
-                    nextState <= THIRD;
-                end if;    
                 
             when THIRD => 
-                start <= ACTIVE;
                 waveform <= not ACTIVE;
-                if (txEn = not ACTIVE) and (goNextState = ACTIVE) then
-                    nextState <= WAIT_FOR_EN;
-                elsif (txEn = ACTIVE) and (goNextState = ACTIVE) and (dataBit = ACTIVE) then
-                    nextState <= FIRST_1;
-                elsif (txEn = ACTIVE) and (goNextState = ACTIVE) and (dataBit = not ACTIVE) then
-                    nextState <= FIRST_0;    
+                if (thirdNextState = ACTIVE) then
+                    nextState <= DONE;          
                 end if;
+                
+            when DONE => 
+                waveform <= not ACTIVE;
+                txDone <= ACTIVE;
+                if (txEn = ACTIVE) then
+                    nextState <= FIRST;  
+                else
+                    nextState <= WAIT_FOR_EN;            
+                end if;    
         end case;
     end process;
 end BitEncoder_ARCH;

@@ -11,6 +11,6 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
-Compiling architecture bitencoder_arch of entity xil_defaultlib.BitEncoder [\BitEncoder(pulse_time=40)\]
+Compiling architecture bitencoder_arch of entity xil_defaultlib.BitEncoder [bitencoder_default]
 Compiling architecture bitencoder_tb_arch of entity xil_defaultlib.bitencoder_tb
 Built simulation snapshot BitEncoder_TB_behav

@@ -18,7 +18,7 @@ end BitEncoder_TB;
 architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     
     constant ACTIVE: std_logic := '1';
-    constant PULSE_TIME:       positive := 40;
+    constant PULSE_TIME:       positive := 400;
     constant NUM_OF_DATA_BITS: positive := 24;
     constant CLOCK_FREQUENCY:  positive := 100000000;
     
@@ -91,7 +91,7 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        data <= "010101010101010101010101";
+        data <= "111111111111111111111111";
         txEn <= ACTIVE;
         wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
         txEn <= not ACTIVE;

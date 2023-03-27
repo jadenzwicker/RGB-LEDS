@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Thu Mar 23 14:11:56 2023" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Mon Mar 27 16:32:28 2023" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2020.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "3064766" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "WIN64" -context "software_version_and_target_device"
@@ -14,7 +14,7 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "bada158f-fa39-4062-babe-8debdab47cd6" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "d993a3747d9c4b418d8d4c007c4df15f" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "113" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "144" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Windows Server 2016 or Windows 10" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "major release  (build 9200)" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "AMD Ryzen 5 3450U with Radeon Vega Mobile Gfx  " -context "user_environment"
@@ -33,10 +33,10 @@ webtalk_add_data -client xsim -key Debug -value "typical" -context "xsim\\comman
 webtalk_add_data -client xsim -key Simulation_Image_Code -value "65 KB" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Simulation_Image_Data -value "2 KB" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Total_Nets -value "0" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Total_Processes -value "6" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Total_Processes -value "7" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Total_Instances -value "6" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Xilinx_HDL_Libraries_Used -value "secureip " -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Time -value "1.53_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Memory -value "59836_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 263161667 -regid "" -xml C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.xml -html C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.html -wdm C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Compiler_Time -value "1.48_sec" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Compiler_Memory -value "59856_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 3649884430 -regid "" -xml C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.xml -html C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.html -wdm C:/Users/jaden/OneDrive/Desktop/RGB_LEDS/BitEncoder/BitEncoder.sim/sim_1/behav/xsim/xsim.dir/BitEncoder_TB_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate
