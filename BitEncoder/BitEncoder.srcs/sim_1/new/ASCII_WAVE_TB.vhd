@@ -77,6 +77,10 @@ begin
     begin
         sw(7 downto 0) <= "01100101";    -- Green
         sw(15) <= ACTIVE;
+        wait for 28795 ns;            -- 24 bits at 1200 ns per pulse '-10' so it has time to update
+        sw(7 downto 0) <= "01110010";
+        wait for 4000 ns;
+        sw(15) <= not ACTIVE;
         
         wait;
     end process;
