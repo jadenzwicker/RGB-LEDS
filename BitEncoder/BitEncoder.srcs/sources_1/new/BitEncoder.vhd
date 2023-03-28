@@ -63,11 +63,12 @@ architecture BitEncoder_ARCH of BitEncoder is
     signal dataBit:     std_logic;
     signal thirdNextState:     std_logic;
     signal start:   std_logic;
+    signal startCountThird: std_logic;
     
   -- Converts given time in ns to Hz and find the count of clock cycles needed to wait
   -- the given time. '- 1' is due to count starting at 0.
     constant COUNT_TO_PULSE: natural := (CLOCK_FREQUENCY/(10**9/PULSE_TIME)) - 1;
-    constant COUNT_TO_PULSE_THIRD:   natural := 38;
+    constant COUNT_TO_PULSE_THIRD:   natural := COUNT_TO_PULSE - 2;
     
     -- Creating needed type and signals for transmit state machine.
     type Tx_States_t is (WAIT_FOR_EN, FIRST, SECOND, THIRD, DONE);
@@ -111,7 +112,7 @@ begin
             count := 0;
         elsif (rising_edge(clock)) then
             -- Manages thirdNextState Pulse
-            if (nextState = THIRD) or (nextState = DONE) or (currentState = THIRD) or (currentState = DONE) then    
+            if (nextState = THIRD) then    
                 if (count = COUNT_TO_PULSE_THIRD) then
                     count := 0;
                     thirdNextState <= ACTIVE;
@@ -163,7 +164,7 @@ begin
     --===================================================================================
     -- State Transition for Transmitter                                           PROCESS
     --===================================================================================
-    STATE_TRANSITION_TRANSMITTER: process(currentState, dataBit, goNextState)
+    STATE_TRANSITION_TRANSMITTER: process(currentState, dataBit, goNextState, thirdNextState, txEn)
     begin
         -- Defaults
         waveform <= not ACTIVE;
@@ -196,6 +197,7 @@ begin
                 
             when THIRD => 
                 waveform <= not ACTIVE;
+                startCountThird <= ACTIVE;
                 if (thirdNextState = ACTIVE) then
                     nextState <= DONE;          
                 end if;
