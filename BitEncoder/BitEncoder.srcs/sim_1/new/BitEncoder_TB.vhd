@@ -91,10 +91,10 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        data <= "111111111111111111111111";
+        --data <= "000000000000000000000000";
+        data <= "101010101010101010101001";
+        --data <= "111111111111111111111111";
         txEn <= ACTIVE;
---        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
---        txEn <= not ACTIVE;
       
         wait;
     end process;

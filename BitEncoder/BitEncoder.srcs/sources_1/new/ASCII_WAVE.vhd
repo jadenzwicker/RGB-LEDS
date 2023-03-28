@@ -29,7 +29,7 @@ architecture ASCII_WAVE_ARCH of ASCII_WAVE is
 	constant ACTIVE: std_logic := '1';
 	
 	-- BitEncoder Constants
-	constant PULSE_TIME:        positive := 40;
+	constant PULSE_TIME:        positive := 400;
 	constant NUM_OF_DATA_BITS:  positive := 24;
 	constant CLOCK_FREQUENCY:   positive := 100000000;
 	

@@ -71,7 +71,7 @@ architecture BitEncoder_ARCH of BitEncoder is
     constant COUNT_TO_PULSE_THIRD:   natural := COUNT_TO_PULSE - 2;
     
     -- Creating needed type and signals for transmit state machine.
-    type Tx_States_t is (WAIT_FOR_EN, FIRST, SECOND, THIRD, DONE);
+    type Tx_States_t is (WAIT_FOR_EN, FIRST_0, SECOND_0, FIRST_1, SECOND_1, THIRD, DONE, DONE2);
     signal currentState: Tx_States_t;
     signal nextState:    Tx_States_t;
 
@@ -170,34 +170,43 @@ begin
         waveform <= not ACTIVE;
         nextState <= currentState;
         start <= ACTIVE;
+        txDone <= not ACTIVE;
         
         case currentState is
             when WAIT_FOR_EN =>
                 start <= not ACTIVE;
-                if (txEn = ACTIVE) then
-                    nextState <= FIRST;
+                if (txEn = ACTIVE) and (dataBit = '0') then
+                    nextState <= FIRST_0;
+                elsif (txEn = ACTIVE) and (dataBit = '1') then
+                    nextState <= FIRST_1;
                 end if;
                 
-            when FIRST =>
+            when FIRST_0 =>
                 waveform <= ACTIVE; 
                 if (goNextState = ACTIVE) then
-                    nextState <= SECOND;
+                    nextState <= SECOND_0;
                 end if;
                 
-            when SECOND => 
-                if (dataBit = '1') then   -- should not be active constant
-                    waveform <= ACTIVE; 
-                elsif (dataBit = '0') then
-                    waveform <= not ACTIVE;    
-                end if;
-                
+            when SECOND_0 => 
+                waveform <= not ACTIVE;
                 if (goNextState = ACTIVE) then
                     nextState <= THIRD;
                 end if;
                 
+            when FIRST_1 =>
+                waveform <= ACTIVE; 
+                if (goNextState = ACTIVE) then
+                    nextState <= SECOND_1;
+                end if;
+                
+            when SECOND_1 => 
+                waveform <= ACTIVE;
+                if (goNextState = ACTIVE) then
+                    nextState <= THIRD;
+                end if;    
+                
             when THIRD => 
                 waveform <= not ACTIVE;
-                startCountThird <= ACTIVE;
                 if (thirdNextState = ACTIVE) then
                     nextState <= DONE;          
                 end if;
@@ -205,11 +214,17 @@ begin
             when DONE => 
                 waveform <= not ACTIVE;
                 txDone <= ACTIVE;
-                if (txEn = ACTIVE) then
-                    nextState <= FIRST;  
+                nextState <= DONE2;             
+                
+            when DONE2 => 
+                waveform <= not ACTIVE;
+                if (txEn = ACTIVE) and (dataBit = '0') then
+                    nextState <= FIRST_0;
+                elsif (txEn = ACTIVE) and (dataBit = '1')then      
+                    nextState <= FIRST_1;
                 else
                     nextState <= WAIT_FOR_EN;            
-                end if;    
+                end if;        
         end case;
     end process;
 end BitEncoder_ARCH;

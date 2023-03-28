@@ -18,10 +18,6 @@ end ASCII_WAVE_TB;
 architecture ASCII_WAVE_TB_ARCH of ASCII_WAVE_TB is
     
     constant ACTIVE: std_logic := '1';
-    constant PULSE_TIME:       positive := 40;
-    constant NUM_OF_DATA_BITS: positive := 24;
-    constant CLOCK_FREQUENCY:  positive := 100000000;
-    
     
     --unit-under-test-------------------------------------COMPONENT
     component ASCII_WAVE
@@ -81,10 +77,6 @@ begin
     begin
         sw(7 downto 0) <= "01100101";    -- Green
         sw(15) <= ACTIVE;
-        wait for 2875 ns;   -- time to transmit 24 bits at slowed down rate
-        sw(15) <= not ACTIVE;
-        
-        wait for 100 ns;
         
         wait;
     end process;
