@@ -95,6 +95,14 @@ begin
         data <= "101010101010101010101001";
         --data <= "111111111111111111111111";
         txEn <= ACTIVE;
+        
+        wait for 28000 ns;
+        --txEn <= not ACTIVE;
+        wait for 100 ns;
+        txEn <= ACTIVE;
+        
+        data <= "100000000000000000000001";
+        
       
         wait;
     end process;
