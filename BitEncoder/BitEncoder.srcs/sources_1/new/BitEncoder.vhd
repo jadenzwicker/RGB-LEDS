@@ -87,6 +87,7 @@ begin
     begin
         if (reset = ACTIVE) then
             count := 0;
+            goNextState <= not ACTIVE;
         elsif (rising_edge(clock)) then
             if (nextState /= WAIT_FOR_EN) then
                 if (count = COUNT_TO_PULSE) then
@@ -112,6 +113,7 @@ begin
     begin
         if (reset = ACTIVE) then
             count := 0;
+            thirdNextState <= not ACTIVE;
         elsif (rising_edge(clock)) then
             if (nextState = THIRD) then    
                 if (count = COUNT_TO_PULSE_THIRD) then

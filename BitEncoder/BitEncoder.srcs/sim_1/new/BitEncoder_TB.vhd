@@ -90,6 +90,9 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
+        txEn <= not ACTIVE;
+        data <= (others => '0');
+        
         wait until reset = not ACTIVE;
         wait until rising_edge(clock);
         txEn <= ACTIVE;
