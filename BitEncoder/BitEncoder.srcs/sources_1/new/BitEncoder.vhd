@@ -13,7 +13,7 @@
 --=          0:  HIGH       - LOW        - LOW
 --=          1:  HIGH       - HIGH       - LOW
 --=      
---=      The waveform transmitted reads the input data LSB to MSB.
+--=      The waveform transmitted reads the input data MSB to LSB.
 --=
 --=      Generic input definitions are described as follows:
 --=          ACTIVE: A constant that is of type std_logic. Should only be defined as '1'
@@ -23,6 +23,10 @@
 --=                      the transmitter should be sending a pulse. In this component the
 --=                      default time a pulse should last is 1200 ns which defines either
 --=                      a '1' or '0' bit. This is described in nanoseconds.
+--=
+--=          NUM_OF_DATA_BITS: A constant that is of type positive. It defines the number
+--=                            of bits of the data input. This allows for a variable 
+--=                            number of bits to be queded for transmission.
 --=
 --=          CLOCK_FREQUENCY: A constant that is of type positive defining the clock 
 --=                           frequency of the system.
@@ -52,12 +56,15 @@ end BitEncoder;
 
 architecture BitEncoder_ARCH of BitEncoder is
    
+    -- pulse that triggers state transition after x amount of clock cycles   
     signal goNextState: std_logic;
+    -- pulse that triggers when bit transmission has completed
     signal txDone:      std_logic;
+    -- current bit being transmitted from data input
     signal dataBit:     std_logic;
+    -- same as goNextState signal but for the third state in the state machine, has 
+    -- different timing
     signal thirdNextState:     std_logic;
-    signal start:   std_logic;
-    signal startCountThird: std_logic;
     
   -- Converts given time in ns to Hz and find the count of clock cycles needed to wait
   -- the given time. '- 1' is due to count starting at 0.
@@ -72,16 +79,16 @@ architecture BitEncoder_ARCH of BitEncoder is
 begin
 
     --===================================================================================
-    -- Pulse Generator Encoder                                                    PROCESS
+    -- Pulse Generator Next                                                       PROCESS
+    --   Manages goNextState Pulse
     --===================================================================================
-    PULSE_GEN_ENCODER: process(reset, clock)
+    PULSE_GEN_NEXT: process(reset, clock)
     variable count: natural range 0 to COUNT_TO_PULSE;
     begin
         if (reset = ACTIVE) then
             count := 0;
         elsif (rising_edge(clock)) then
-            -- Manages goNextState Pulse
-            if (nextState /= WAIT_FOR_EN) or (start = ACTIVE) then    
+            if (nextState /= WAIT_FOR_EN) then
                 if (count = COUNT_TO_PULSE) then
                     count := 0;
                     goNextState <= ACTIVE;
@@ -93,11 +100,12 @@ begin
                 count := 0; 
             end if;         
         end if;
-    end process PULSE_GEN_ENCODER;
+    end process;
     
     
     --===================================================================================
-    -- Pulse Generator Encoder                                                    PROCESS
+    -- Pulse Generator Third                                                      PROCESS
+    --  Manages thirdNextState Pulse
     --===================================================================================
     PULSE_GEN_THIRD: process(reset, clock)
     variable count: natural range 0 to COUNT_TO_PULSE_THIRD;
@@ -105,7 +113,6 @@ begin
         if (reset = ACTIVE) then
             count := 0;
         elsif (rising_edge(clock)) then
-            -- Manages thirdNextState Pulse
             if (nextState = THIRD) then    
                 if (count = COUNT_TO_PULSE_THIRD) then
                     count := 0;
@@ -118,25 +125,26 @@ begin
                 count := 0; 
             end if;          
         end if;
-    end process PULSE_GEN_THIRD;
+    end process;
     
     
     --===================================================================================
     -- Bit Generator                                                              PROCESS
+    --   Handles sending each bit from the input data vector (MSB to LSB)
     --===================================================================================
 	BIT_GEN: process(reset, clock)
-	variable doneCount: natural range 0 to NUM_OF_DATA_BITS - 1 := 0;
+	variable doneCount: natural range 0 to NUM_OF_DATA_BITS - 1 :=(NUM_OF_DATA_BITS - 1);
     begin
         dataBit <= data(doneCount);  -- Defaults
         if (reset = ACTIVE) then
             dataBit <= not ACTIVE;
-            doneCount := 0;
+            doneCount := NUM_OF_DATA_BITS - 1;
         elsif (rising_edge(clock)) then
-            if (doneCount = NUM_OF_DATA_BITS - 1) then        -- max value
+            if (doneCount = 0) then        -- min value
                 dataBit <= dataBit;
             else   
                 if (txDone = ACTIVE) then
-                    doneCount := doneCount + 1;
+                    doneCount := doneCount - 1;
                 end if;
             end if;
         end if;
@@ -158,17 +166,15 @@ begin
     --===================================================================================
     -- State Transition for Transmitter                                           PROCESS
     --===================================================================================
-    STATE_TRANSITION_TRANSMITTER: process(currentState, dataBit, goNextState, thirdNextState, txEn)
+    STATE_TRANSITION_TRANSMITTER: process(currentState, dataBit, goNextState, 
+                                          thirdNextState, txEn)
     begin
         -- Defaults
         waveform <= not ACTIVE;
         nextState <= currentState;
-        start <= ACTIVE;
         txDone <= not ACTIVE;
-        
         case currentState is
             when WAIT_FOR_EN =>
-                start <= not ACTIVE;
                 if (txEn = ACTIVE) and (dataBit = '0') then
                     nextState <= FIRST_0;
                 elsif (txEn = ACTIVE) and (dataBit = '1') then

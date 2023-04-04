@@ -1,6 +1,6 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto d993a3747d9c4b418d8d4c007c4df15f --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot BitTransmitter_TB_behav xil_defaultlib.BitTransmitter_TB -log elaborate.log 
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto d993a3747d9c4b418d8d4c007c4df15f --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot BitEncoder_TB_behav xil_defaultlib.BitEncoder_TB -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -11,6 +11,6 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
-Compiling architecture bittransmitter_arch of entity xil_defaultlib.BitTransmitter [bittransmitter_default]
-Compiling architecture bittransmitter_tb_arch of entity xil_defaultlib.bittransmitter_tb
-Built simulation snapshot BitTransmitter_TB_behav
+Compiling architecture bitencoder_arch of entity xil_defaultlib.BitEncoder [bitencoder_default]
+Compiling architecture bitencoder_tb_arch of entity xil_defaultlib.bitencoder_tb
+Built simulation snapshot BitEncoder_TB_behav

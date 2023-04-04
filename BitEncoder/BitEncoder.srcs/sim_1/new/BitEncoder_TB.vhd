@@ -4,7 +4,7 @@
 --=  University: Kennesaw State University
 --=  Designer: Jaden Zwicker
 --=
---=      Test Bench for BitEncoder generic component
+--=      Test Bench for the BitEncoder generic component
 --=
 --==================================================================================
 
@@ -21,7 +21,6 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     constant PULSE_TIME:       positive := 400;
     constant NUM_OF_DATA_BITS: positive := 24;
     constant CLOCK_FREQUENCY:  positive := 100000000;
-    
     
     --unit-under-test-------------------------------------COMPONENT
     component BitEncoder
@@ -78,32 +77,47 @@ begin
     --============================================================================
     --  Reset        
     --============================================================================
---    SYSTEM_RESET: process
---    begin
---        reset <= ACTIVE;
---        wait for 20 ns;
---        reset <= not ACTIVE;
---        wait;
---    end process SYSTEM_RESET;
+    SYSTEM_RESET: process
+    begin
+        reset <= ACTIVE;
+        wait for 50 ns;
+        reset <= not ACTIVE;
+        wait;
+    end process SYSTEM_RESET;
     
     --============================================================================
     --  Test Case Driver
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        --data <= "000000000000000000000000";
-        data <= "101010101010101010101001";
-        --data <= "111111111111111111111111";
+        wait until reset = not ACTIVE;
+        wait until rising_edge(clock);
         txEn <= ACTIVE;
+        data <= "111111111111000000000000";
         
-        wait for 28000 ns;
-        --txEn <= not ACTIVE;
-        wait for 100 ns;
-        txEn <= ACTIVE;
+        -- Turns txEn off after all data has been transmitted
+       -- data'length - 1 becasue txEn must be off before clock starts transmission again
+        for i in 0 to data'length - 1 loop
+            wait until waveform = '1';
+        end loop;
+        txEn <= not ACTIVE;
         
-        data <= "100000000000000000000001";
+--        wait for 1000 ns;
+--        wait until rising_edge(clock);
+--        txEn <= ACTIVE;
+--        data <= "101010101010101010101001";
         
-      
+--        -- Turns txEn off after all data has been transmitted
+--       -- data'length - 1 becasue txEn must be off before clock starts transmission again
+--        for i in 0 to data'length - 1 loop
+--            wait until waveform = '1';
+--        end loop;
+--        txEn <= not ACTIVE;
+        
+        
+--        --data <= "000000000000000000000000";
+--        --data <= "111111111111111111111111";
+--        --data <= "100000000000000000000001";
         wait;
     end process;
 end BitEncoder_TB_ARCH;
