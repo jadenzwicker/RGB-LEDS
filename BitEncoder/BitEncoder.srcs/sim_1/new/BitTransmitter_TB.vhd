@@ -88,26 +88,44 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-    
-        --wait until (reset = not ACTIVE);
-        --data <= "000000000000000000000000";
-        data <= "111100001111000011110000";
-        --data <= "111111111111111111111111";
-        txStart <= ACTIVE;
-        wait for 40 ns;
+        txDone <= not ACTIVE;
         txStart <= not ACTIVE;
+        data <= (others => '0');
         
-        for i in 0 to 30 loop
-            wait for 30 ns;
+        wait until (reset = not ACTIVE);
+        wait until rising_edge(clock);
+        txStart <= ACTIVE;
+        data <= "001010101010101010101111";
+        
+        --data <= "111100001111000011110000";
+        --data <= "111111111111111111111111";
+        --data <= "000000000000000000000000";
+        wait until rising_edge(clock);
+        txStart <= not ACTIVE;  -- only needs pulse at start 'enable signal'
+        
+        for i in 0 to NUM_OF_DATA_BITS + 5 loop    -- +5 to test that output is 0 when transmission complete
+            wait for 100 ns;
             wait until rising_edge(clock);
             txDone <= ACTIVE;
             wait until rising_edge(clock);
             txDone <= not ACTIVE;
         end loop;
         
-        --data <= "100000000000000000000001";
+        wait for 200 ns;
+        wait until rising_edge(clock);
+        data <= "111111111111111111111111";
+        txStart <= ACTIVE;
+        wait until rising_edge(clock);
+        txStart <= not ACTIVE;
         
-      
+        for i in 0 to NUM_OF_DATA_BITS + 5 loop
+            wait for 100 ns;
+            wait until rising_edge(clock);
+            txDone <= ACTIVE;
+            wait until rising_edge(clock);
+            txDone <= not ACTIVE;
+        end loop;
+
         wait;
     end process;
 end BitTransmitter_TB_ARCH;

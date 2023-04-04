@@ -12,11 +12,10 @@
 --=      Generic input definitions are described as follows:
 --=          ACTIVE: A constant that is of type std_logic. Should only be defined as '1'
 --=                  or '0' according to an active LOW or HIGH system.
-
 --=
---=          CLOCK_FREQUENCY: A constant that is of type positive defining the clock 
---=                           frequency of the system.
---=                           This is described in real time Hz.
+--=          NUM_OF_DATA_BITS: A constant that is of type positive. It defines the number
+--=                            of bits of the data input. This allows for a variable 
+--=                            number of bits to be queded for transmission.
 --= 
 --=======================================================================================
 
@@ -32,7 +31,7 @@ entity BitTransmitter is
     port (
     	reset:      in  std_logic;
         clock:      in  std_logic;
-    	txStart:    in  std_logic;
+    	txStart:    in  std_logic;        -- USE A LOAD TO LOAD DATA
     	txDone:     in  std_logic;
     	data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
         currentBit: out std_logic
@@ -41,9 +40,10 @@ end BitTransmitter;
 
 architecture BitTransmitter_ARCH of BitTransmitter is
     
-    signal shift_reg : std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0) := (others => '0');
-    signal shift_counter : integer range 0 to NUM_OF_DATA_BITS - 1 := 0;
+    --signal shift_reg : std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0) := (others => '0');
+    signal doneCounter : integer range 0 to NUM_OF_DATA_BITS - 1 := 0;
     signal txStarted : boolean := false;
+    signal dataReg : std_logic_vector(data'length -1 downto 0);
     
 begin
 
@@ -53,22 +53,25 @@ begin
     BIT_TRANS: process (clock, reset)
     begin
         if (reset = ACTIVE) then
-            shift_reg <= (others => '0');
-            shift_counter <= 0;
+            --shift_reg <= (others => '0');
+            doneCounter <= 0;
             txStarted <= false;
             currentBit <= '0';
+            dataReg <= (others => '0');
         elsif (rising_edge(clock)) then
             if (txStart = ACTIVE) and (txStarted = false) then
+                dataReg <= data;
                 txStarted <= true;
-                currentBit <= data(NUM_OF_DATA_BITS - 1);
-                shift_counter <= 1;
+                currentBit <= data(NUM_OF_DATA_BITS - 1);          -- no need for register since data should be constant at time of storage anyways
+                doneCounter <= 1;
             elsif (txDone = ACTIVE and txStarted) then
-                if (shift_counter < NUM_OF_DATA_BITS) then
-                    currentBit <= data(NUM_OF_DATA_BITS - shift_counter - 1);
-                    shift_counter <= shift_counter + 1;
+                if (doneCounter < NUM_OF_DATA_BITS) then
+                    currentBit <= dataReg(NUM_OF_DATA_BITS - doneCounter - 1);
+                    doneCounter <= doneCounter + 1;
                 else
                     txStarted <= false;
-                    shift_counter <= 0;
+                    doneCounter <= 0;
+                    currentBit <= '0';   -- after transmission is completed
                 end if;
             end if;
         end if;
