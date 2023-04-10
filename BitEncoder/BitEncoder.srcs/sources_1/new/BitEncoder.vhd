@@ -42,15 +42,15 @@ entity BitEncoder is
     generic (
         ACTIVE: std_logic := '1';
         PULSE_TIME:          positive := 400;      -- In ns
-        NUM_OF_DATA_BITS:    positive := 24;
         CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
         );
     port (
     	reset:    in  std_logic;
         clock:    in  std_logic;
     	txEn:     in  std_logic;
-    	data:     in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
-        waveform: out std_logic
+    	dataBit:  in  std_logic;
+        waveform: out std_logic;
+        txDone:   out std_logic
         );
 end BitEncoder;
 
@@ -58,10 +58,6 @@ architecture BitEncoder_ARCH of BitEncoder is
    
     -- pulse that triggers state transition after x amount of clock cycles   
     signal goNextState: std_logic;
-    -- pulse that triggers when bit transmission has completed
-    signal txDone:      std_logic;
-    -- current bit being transmitted from data input
-    signal dataBit:     std_logic;
     -- same as goNextState signal but for the third state in the state machine, has 
     -- different timing
     signal thirdNextState:     std_logic;
@@ -130,27 +126,27 @@ begin
     end process;
     
     
-    --===================================================================================
-    -- Bit Generator                                                              PROCESS
-    --   Handles sending each bit from the input data vector (MSB to LSB)
-    --===================================================================================
-	BIT_GEN: process(reset, clock)
-	variable doneCount: natural range 0 to NUM_OF_DATA_BITS - 1 :=(NUM_OF_DATA_BITS - 1);
-    begin
-        dataBit <= data(doneCount);  -- Defaults
-        if (reset = ACTIVE) then
-            dataBit <= not ACTIVE;
-            doneCount := NUM_OF_DATA_BITS - 1;
-        elsif (rising_edge(clock)) then
-            if (doneCount = 0) then        -- min value
-                dataBit <= dataBit;
-            else   
-                if (txDone = ACTIVE) then
-                    doneCount := doneCount - 1;
-                end if;
-            end if;
-        end if;
-    end process BIT_GEN;
+--    --===================================================================================
+--    -- Bit Generator                                                              PROCESS
+--    --   Handles sending each bit from the input data vector (MSB to LSB)
+--    --===================================================================================
+--	BIT_GEN: process(reset, clock)
+--	variable doneCount: natural range 0 to NUM_OF_DATA_BITS - 1 :=(NUM_OF_DATA_BITS - 1);
+--    begin
+--        dataBit <= data(doneCount);  -- Defaults
+--        if (reset = ACTIVE) then
+--            dataBit <= not ACTIVE;
+--            doneCount := NUM_OF_DATA_BITS - 1;
+--        elsif (rising_edge(clock)) then
+--            if (doneCount = 0) then        -- min value
+--                dataBit <= dataBit;
+--            else   
+--                if (txDone = ACTIVE) then
+--                    doneCount := doneCount - 1;
+--                end if;
+--            end if;
+--        end if;
+--    end process BIT_GEN;
     
     
     --===================================================================================

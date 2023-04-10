@@ -29,12 +29,14 @@ entity BitTransmitter is
         NUM_OF_DATA_BITS: positive := 24
         );
     port (
-    	reset:      in  std_logic;
-        clock:      in  std_logic;
-    	txStart:    in  std_logic;        -- USE A LOAD TO LOAD DATA
-    	txDone:     in  std_logic;
-    	data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
-        currentBit: out std_logic
+    	reset:         in  std_logic;
+        clock:         in  std_logic;
+    	txStart:       in  std_logic;
+    	txBitDone:     in  std_logic;
+    	data:          in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
+        currentBit:    out std_logic;
+        txEn:          out std_logic;
+        bitTxComplete: out std_logic
         );
 end BitTransmitter;
 
@@ -52,19 +54,22 @@ begin
     --===================================================================================
     BIT_TRANS: process (clock, reset)
     begin
+        bitTxComplete <= not ACTIVE;
         if (reset = ACTIVE) then
-            --shift_reg <= (others => '0');
             doneCounter <= 0;
-            txStarted <= false;
-            currentBit <= '0';
-            dataReg <= (others => '0');
+            txStarted   <= false;
+            currentBit  <= '0';
+            dataReg     <= (others => '0');
+            bitTxComplete <= not ACTIVE;
+            txEn <= not ACTIVE;
         elsif (rising_edge(clock)) then
             if (txStart = ACTIVE) and (txStarted = false) then
                 dataReg <= data;
                 txStarted <= true;
                 currentBit <= data(NUM_OF_DATA_BITS - 1);          -- no need for register since data should be constant at time of storage anyways
                 doneCounter <= 1;
-            elsif (txDone = ACTIVE and txStarted) then
+                txEn <= ACTIVE;
+            elsif (txBitDone = ACTIVE and txStarted) then
                 if (doneCounter < NUM_OF_DATA_BITS) then
                     currentBit <= dataReg(NUM_OF_DATA_BITS - doneCounter - 1);
                     doneCounter <= doneCounter + 1;
@@ -72,6 +77,8 @@ begin
                     txStarted <= false;
                     doneCounter <= 0;
                     currentBit <= '0';   -- after transmission is completed
+                    bitTxComplete  <= ACTIVE;
+                    txEn <= not ACTIVE;
                 end if;
             end if;
         end if;

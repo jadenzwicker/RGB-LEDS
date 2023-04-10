@@ -25,15 +25,17 @@ architecture BitTransmitter_TB_ARCH of BitTransmitter_TB is
     component BitTransmitter
         generic (
             ACTIVE: std_logic := '1';
-            NUM_OF_DATA_BITS:    positive := 24
+            NUM_OF_DATA_BITS: positive := 24
             );
         port (
-            reset:      in  std_logic;
-            clock:      in  std_logic;
-            txStart:    in  std_logic;
-            txDone:     in  std_logic;
-            data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
-            currentBit: out std_logic
+            reset:         in  std_logic;
+            clock:         in  std_logic;
+            txStart:       in  std_logic;
+            txBitDone:     in  std_logic;
+            data:          in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
+            currentBit:    out std_logic;
+            txEn:          out std_logic;
+            bitTxComplete: out std_logic
             );
     end component;
     
@@ -41,9 +43,11 @@ architecture BitTransmitter_TB_ARCH of BitTransmitter_TB is
     signal reset:      std_logic;
     signal clock:      std_logic;
     signal txStart:    std_logic;
-    signal txDone:     std_logic;
+    signal txBitDone:     std_logic;
     signal data:       std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
     signal currentBit: std_logic;
+    signal txEn: std_logic;
+    signal bitTxComplete: std_logic;
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
@@ -56,9 +60,11 @@ begin
         reset      => reset,
         clock      => clock,
         txStart    => txStart,
-        txDone     => txDone,
+        txBitDone     => txBitDone,
         data       => data,
-        currentBit => currentBit
+        currentBit => currentBit,
+        txEn => txEn,
+        bitTxComplete => bitTxComplete
         );
 
     --============================================================================
@@ -88,27 +94,24 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        txDone <= not ACTIVE;
+        txBitDone <= not ACTIVE;
         txStart <= not ACTIVE;
         data <= (others => '0');
         
         wait until (reset = not ACTIVE);
         wait until rising_edge(clock);
         txStart <= ACTIVE;
-        data <= "001010101010101010101111";
-        
-        --data <= "111100001111000011110000";
-        --data <= "111111111111111111111111";
-        --data <= "000000000000000000000000";
+        data <= "111010101010101010101111";
+
         wait until rising_edge(clock);
         txStart <= not ACTIVE;  -- only needs pulse at start 'enable signal'
         
         for i in 0 to NUM_OF_DATA_BITS + 5 loop    -- +5 to test that output is 0 when transmission complete
-            wait for 100 ns;
+            wait for 400 ns;
             wait until rising_edge(clock);
-            txDone <= ACTIVE;
+            txBitDone <= ACTIVE;
             wait until rising_edge(clock);
-            txDone <= not ACTIVE;
+            txBitDone <= not ACTIVE;
         end loop;
         
         wait for 200 ns;
@@ -119,11 +122,11 @@ begin
         txStart <= not ACTIVE;
         
         for i in 0 to NUM_OF_DATA_BITS + 5 loop
-            wait for 100 ns;
+            wait for 400 ns;
             wait until rising_edge(clock);
-            txDone <= ACTIVE;
+            txBitDone <= ACTIVE;
             wait until rising_edge(clock);
-            txDone <= not ACTIVE;
+            txBitDone <= not ACTIVE;
         end loop;
 
         wait;
