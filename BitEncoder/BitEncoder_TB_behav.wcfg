@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="BitEncoder_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="BitEncoder_TB" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="61000001fs"></ZoomEndTime>
+      <Cursor1Time time="27685000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="233"></NameColumnWidth>
+      <ValueColumnWidth column_width="380"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject fp_name="/BitEncoder_TB/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/clock" type="logic">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/data" type="array">
+      <obj_property name="ElementShortName">data[23:0]</obj_property>
+      <obj_property name="ObjectShortName">data[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/dataReg" type="array">
+      <obj_property name="ElementShortName">dataReg[23:0]</obj_property>
+      <obj_property name="ObjectShortName">dataReg[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/txStart" type="logic">
+      <obj_property name="ElementShortName">txStart</obj_property>
+      <obj_property name="ObjectShortName">txStart</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/readyForData" type="logic">
+      <obj_property name="ElementShortName">readyForData</obj_property>
+      <obj_property name="ObjectShortName">readyForData</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/waveform" type="logic">
+      <obj_property name="ElementShortName">waveform</obj_property>
+      <obj_property name="ObjectShortName">waveform</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/currentBit" type="logic">
+      <obj_property name="ElementShortName">currentBit</obj_property>
+      <obj_property name="ObjectShortName">currentBit</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/pulseDone" type="logic">
+      <obj_property name="ElementShortName">pulseDone</obj_property>
+      <obj_property name="ObjectShortName">pulseDone</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/txEn" type="logic">
+      <obj_property name="ElementShortName">txEn</obj_property>
+      <obj_property name="ObjectShortName">txEn</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/pulseCounter" type="other">
+      <obj_property name="ElementShortName">pulseCounter</obj_property>
+      <obj_property name="ObjectShortName">pulseCounter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/txStarted" type="other">
+      <obj_property name="ElementShortName">txStarted</obj_property>
+      <obj_property name="ObjectShortName">txStarted</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/lastBit" type="logic">
+      <obj_property name="ElementShortName">lastBit</obj_property>
+      <obj_property name="ObjectShortName">lastBit</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/txComplete" type="logic">
+      <obj_property name="ElementShortName">txComplete</obj_property>
+      <obj_property name="ObjectShortName">txComplete</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/currentState" type="other">
+      <obj_property name="ElementShortName">currentState</obj_property>
+      <obj_property name="ObjectShortName">currentState</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/nextState" type="other">
+      <obj_property name="ElementShortName">nextState</obj_property>
+      <obj_property name="ObjectShortName">nextState</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/goNextState" type="logic">
+      <obj_property name="ElementShortName">goNextState</obj_property>
+      <obj_property name="ObjectShortName">goNextState</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/UUT/thirdNextState" type="logic">
+      <obj_property name="ElementShortName">thirdNextState</obj_property>
+      <obj_property name="ObjectShortName">thirdNextState</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/ACTIVE" type="logic">
+      <obj_property name="ElementShortName">ACTIVE</obj_property>
+      <obj_property name="ObjectShortName">ACTIVE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/PULSE_TIME" type="other">
+      <obj_property name="ElementShortName">PULSE_TIME</obj_property>
+      <obj_property name="ObjectShortName">PULSE_TIME</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/NUM_OF_DATA_BITS" type="other">
+      <obj_property name="ElementShortName">NUM_OF_DATA_BITS</obj_property>
+      <obj_property name="ObjectShortName">NUM_OF_DATA_BITS</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BitEncoder_TB/CLOCK_FREQUENCY" type="other">
+      <obj_property name="ElementShortName">CLOCK_FREQUENCY</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_FREQUENCY</obj_property>
+   </wvobject>
+</wave_config>

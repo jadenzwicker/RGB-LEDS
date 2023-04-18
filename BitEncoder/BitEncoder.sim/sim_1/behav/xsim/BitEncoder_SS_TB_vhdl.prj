@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../BitEncoder.srcs/sources_1/new/BitEncoder_SS.vhd" \
+"../../../../BitEncoder.srcs/sim_1/new/BitEncoder_SS_TB.vhd" \
+
+# Do not sort compile order
+nosort
