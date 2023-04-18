@@ -25,26 +25,30 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     --unit-under-test-------------------------------------COMPONENT
     component BitEncoder
         generic (
-            ACTIVE: std_logic := '1';
-            PULSE_TIME:          positive := 400;      -- In ns
-            NUM_OF_DATA_BITS:    positive := 24;
-            CLOCK_FREQUENCY:     positive := 100000000 -- In Hz
+            ACTIVE:           std_logic := '1';
+            PULSE_TIME:       positive := 400;      -- In ns
+            CLOCK_FREQUENCY:  positive := 100000000; -- In Hz
+            NUM_OF_DATA_BITS: positive := 24
             );
         port (
-            reset:    in  std_logic;
-            clock:    in  std_logic;
-            txEn:     in  std_logic;
-            data:     in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
-            waveform: out std_logic
+            clock:      in  std_logic;
+            reset:      in  std_logic;
+            txStart:    in  std_logic;    -- begins transmission, when set active the state of 'data' port will be latched in a register. do not activate transmission without correct data waiting at 'data' port..
+            data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);       -- generic sized port to hold the data that is to be transmitted. one txStarted is triggered the data will be held in a register so this port does not need to be held constant throughout transmission
+            waveform:   out std_logic;                -- output pulse encoded waveform of the input data
+            readyForMoreData: out std_logic;                 -- output which notifies a conrtroller system that the data's transmission has been completed.
+            txComplete: out std_logic
             );
     end component;
     
     --uut-signals-------------------------------------------SIGNALS
     signal reset:    std_logic;
     signal clock:    std_logic;
-    signal txEn:     std_logic;
+    signal txStart:     std_logic;
     signal data:     std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
     signal waveform: std_logic;
+    signal readyForMoreData: std_logic;
+    signal txComplete: std_logic;
     
 begin
     --Unit-Under-Test-------------------------------------------UUT
@@ -58,9 +62,11 @@ begin
     port map(
         reset    => reset,
         clock    => clock,
-        txEn     => txEn,
+        txStart     => txStart,
         data     => data,
-        waveform => waveform
+        waveform => waveform,
+        readyForMoreData => readyForMoreData,
+        txComplete => txComplete
         );
 
     --============================================================================
@@ -90,37 +96,26 @@ begin
     --============================================================================
     TEST_CASE_DRIVER: process
     begin
-        txEn <= not ACTIVE;
+    
+        txStart <= not ACTIVE;
         data <= (others => '0');
         
-        wait until reset = not ACTIVE;
+        wait until (reset = not ACTIVE);
         wait until rising_edge(clock);
-        txEn <= ACTIVE;
-        data <= "111111111111000000000000";
+        txStart <= ACTIVE;
+        data <= "111010101010101010101111";
+
+        wait until rising_edge(clock);
+        txStart <= not ACTIVE;  -- only needs pulse at start 'enable signal'
         
-        -- Turns txEn off after all data has been transmitted
-       -- data'length - 1 becasue txEn must be off before clock starts transmission again
-        for i in 0 to data'length - 1 loop
-            wait until waveform = '1';
-        end loop;
-        txEn <= not ACTIVE;
+        wait until readyForMoreData = ACTIVE;
+        wait until rising_edge(clock);
+        data <= "101111111111111111111111";
+        txStart <= ACTIVE;
+        wait until rising_edge(clock);
+        txStart <= not ACTIVE;
         
---        wait for 1000 ns;
---        wait until rising_edge(clock);
---        txEn <= ACTIVE;
---        data <= "101010101010101010101001";
-        
---        -- Turns txEn off after all data has been transmitted
---       -- data'length - 1 becasue txEn must be off before clock starts transmission again
---        for i in 0 to data'length - 1 loop
---            wait until waveform = '1';
---        end loop;
---        txEn <= not ACTIVE;
-        
-        
---        --data <= "000000000000000000000000";
---        --data <= "111111111111111111111111";
---        --data <= "100000000000000000000001";
+       
         wait;
     end process;
 end BitEncoder_TB_ARCH;
