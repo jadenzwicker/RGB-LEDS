@@ -51,7 +51,7 @@ entity BitEncoder is
     	txStart:    in  std_logic;    -- begins transmission, when set active the state of 'data' port will be latched in a register. do not activate transmission without correct data waiting at 'data' port..
     	data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);       -- generic sized port to hold the data that is to be transmitted. one txStarted is triggered the data will be held in a register so this port does not need to be held constant throughout transmission
         waveform:   out std_logic;                -- output pulse encoded waveform of the input data
-        readyForMoreData: out std_logic;                 -- output which notifies a conrtroller system that the data's transmission has been completed.
+        readyForData: out std_logic;                 -- output which notifies a conrtroller system that the data's transmission has been completed.
         txComplete: out std_logic
         );
 end BitEncoder;
@@ -86,20 +86,16 @@ architecture BitEncoder_ARCH of BitEncoder is
 
 begin
 
-
     -- manages notifing user of when the system can recive new data to transmit.
     DATA_READY: process(reset, clock)
     begin
         if (reset = ACTIVE) then
-            readyForMoreData <= not ACTIVE;
-            --txComplete <= not ACTIVE;     -- just hear to make sure it follows reset
+            readyForData <= not ACTIVE;
         elsif (rising_edge(clock)) then
-            if (lastBit = ACTIVE) then
-                readyForMoreData <= ACTIVE;
-            elsif (txStarted = false) then
-                readyForMoreData <= ACTIVE;
+            if (txStarted = false) then
+                readyForData <= ACTIVE;
             else 
-                readyForMoreData <= not ACTIVE;
+                readyForData <= not ACTIVE;
             end if;
         end if;
     end process;

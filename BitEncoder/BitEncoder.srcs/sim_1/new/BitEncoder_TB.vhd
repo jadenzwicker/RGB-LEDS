@@ -36,7 +36,7 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
             txStart:    in  std_logic;    -- begins transmission, when set active the state of 'data' port will be latched in a register. do not activate transmission without correct data waiting at 'data' port..
             data:       in  std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);       -- generic sized port to hold the data that is to be transmitted. one txStarted is triggered the data will be held in a register so this port does not need to be held constant throughout transmission
             waveform:   out std_logic;                -- output pulse encoded waveform of the input data
-            readyForMoreData: out std_logic;                 -- output which notifies a conrtroller system that the data's transmission has been completed.
+            readyForData: out std_logic;                 -- output which notifies a conrtroller system that the data's transmission has been completed.
             txComplete: out std_logic
             );
     end component;
@@ -47,7 +47,7 @@ architecture BitEncoder_TB_ARCH of BitEncoder_TB is
     signal txStart:     std_logic;
     signal data:     std_logic_vector(NUM_OF_DATA_BITS - 1 downto 0);
     signal waveform: std_logic;
-    signal readyForMoreData: std_logic;
+    signal readyForData: std_logic;
     signal txComplete: std_logic;
     
 begin
@@ -65,7 +65,7 @@ begin
         txStart     => txStart,
         data     => data,
         waveform => waveform,
-        readyForMoreData => readyForMoreData,
+        readyForData => readyForData,
         txComplete => txComplete
         );
 
@@ -108,7 +108,7 @@ begin
         wait until rising_edge(clock);
         txStart <= not ACTIVE;  -- only needs pulse at start 'enable signal'
         
-        wait until readyForMoreData = ACTIVE;
+        wait until readyForData = ACTIVE;
         wait until rising_edge(clock);
         data <= "101111111111111111111111";
         txStart <= ACTIVE;

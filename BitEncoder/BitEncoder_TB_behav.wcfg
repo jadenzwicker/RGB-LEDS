@@ -10,9 +10,9 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="28810900fs"></ZoomStartTime>
-      <ZoomEndTime time="29195501fs"></ZoomEndTime>
-      <Cursor1Time time="28875000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="61000001fs"></ZoomEndTime>
+      <Cursor1Time time="27685000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="233"></NameColumnWidth>
@@ -39,9 +39,9 @@
       <obj_property name="ElementShortName">txStart</obj_property>
       <obj_property name="ObjectShortName">txStart</obj_property>
    </wvobject>
-   <wvobject fp_name="/BitEncoder_TB/readyForMoreData" type="logic">
-      <obj_property name="ElementShortName">readyForMoreData</obj_property>
-      <obj_property name="ObjectShortName">readyForMoreData</obj_property>
+   <wvobject fp_name="/BitEncoder_TB/readyForData" type="logic">
+      <obj_property name="ElementShortName">readyForData</obj_property>
+      <obj_property name="ObjectShortName">readyForData</obj_property>
    </wvobject>
    <wvobject fp_name="/BitEncoder_TB/waveform" type="logic">
       <obj_property name="ElementShortName">waveform</obj_property>
