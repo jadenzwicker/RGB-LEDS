@@ -1,0 +1,1 @@
+This sub-project was the start of the RGB-LEDs project. It was done in the beginning of the course so the work contained is amatuer. Looking back the concept could be achieved more efficiently however this can serve as a learning experience. :)
